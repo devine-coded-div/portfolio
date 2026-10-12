@@ -1,0 +1,1294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Divyanshu Lingwal: Frontend Developer (Angular, TypeScript) building sports-tech platforms, and state-level table tennis athlete for Haryana.">
+<meta property="og:title" content="Divyanshu Lingwal · Frontend Developer">
+<meta property="og:description" content="Sports-tech web apps used by four table tennis federations. Table tennis athlete for Haryana.">
+<meta property="og:image" content="pvl/statistics.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f4fd1'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23e85d12'/%3E%3C/svg%3E">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Divyanshu Lingwal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;1,700;1,800&family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: an IDE-like dark workspace. Sticky tab bar = file tabs; each section is a "file" with a gutter of line-number style labels. Hero = live 3D rally on a wireframe TT table. */
+:root{
+  color-scheme: dark;
+  --bg:#0b1020;          /* deep ink-navy, blue-biased */
+  --panel:#111830;
+  --line:#1f2a4a;
+  --fg:#dfe6f7;
+  --muted:#8693b5;
+  --accent:#4fc3ff;      /* table-blue / cyan */
+  --ball:#ff8a2a;        /* celluloid orange ball */
+  --ok:#5ee6a8;
+  --on-accent:#06101f;
+  --deck:#141c36;
+  --keyside:#060a16;
+  --table:#173f8f;
+  --on-table:#ffffff;
+  --paper:#e8edf8;
+  --paper-ink:#0f1730;
+  --f-display:"Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+/* "Everyone" mode: light, sporty court palette. Same token names, so shared parts (header, contact) follow. */
+:root[data-mode="human"]{
+  color-scheme: light;
+  --bg:#f3f5fa; --panel:#ffffff; --line:#dbe1ee; --fg:#101a33; --muted:#56627d;
+  --accent:#1f4fd1; --ball:#e85d12; --ok:#0f8a63; --on-accent:#ffffff;
+  --deck:#e2e7f1; --keyside:#b9c3d8; --table:#1f4fd1; --on-table:#ffffff;
+  --paper:#ffffff; --paper-ink:#101a33;
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+}
+:root[data-mode="human"] .mode-dev,:root[data-mode="human"] .only-dev{display:none!important}
+:root:not([data-mode="human"]) .mode-human,:root:not([data-mode="human"]) .only-human{display:none!important}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 var(--f-body);margin:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--ball);outline-offset:3px;border-radius:3px}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.mono{font-family:var(--f-mono)}
+.c-key{color:#c792ea}.c-str{color:var(--ok)}.c-num{color:var(--ball)}.c-com{color:var(--muted)}.c-fn{color:var(--accent)}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:20px;min-height:52px}
+.brand{font:600 14px var(--f-mono);color:var(--fg);white-space:nowrap}
+.brand b{color:var(--ball)}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{font:500 12.5px var(--f-mono);color:var(--muted);padding:15px 12px;border-bottom:2px solid transparent;white-space:nowrap}
+.tabs a:hover,.tabs a.on{color:var(--fg);border-bottom-color:var(--accent);text-decoration:none}
+
+/* hero */
+.hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:24px;align-items:center;padding-block:56px 48px}
+.hero-text{min-width:0;position:relative;z-index:2}
+.prompt{font:13px var(--f-mono);color:var(--muted);margin:0 0 18px}
+.prompt span{color:var(--ok)}
+h1{font:700 clamp(40px,7vw,76px)/0.98 var(--f-display);letter-spacing:-0.01em;margin:0 0 16px;text-wrap:balance}
+h1 .last{color:var(--accent)}
+.role{font:500 clamp(15px,2vw,18px) var(--f-mono);margin:0 0 22px;min-height:1.6em}
+.role .cursor{display:inline-block;width:.6ch;height:1.1em;background:var(--ball);vertical-align:-0.15em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p.lede{color:var(--muted);max-width:52ch;margin:0 0 26px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{font:600 13px var(--f-mono);padding:11px 16px;border:1px solid var(--line);border-radius:6px;color:var(--fg);background:var(--panel);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.btn:hover{text-decoration:none;border-color:var(--accent)}
+.stage{position:relative;min-width:0;aspect-ratio:1/0.9;max-width:100%}
+#rally{width:100%;height:100%;display:block}
+.hud{position:absolute;left:10px;bottom:10px;font:11px/1.5 var(--f-mono);color:var(--muted);background:color-mix(in srgb,var(--bg) 70%,transparent);padding:6px 9px;border:1px solid var(--line);border-radius:4px;pointer-events:none}
+.hud b{color:var(--ball);font-weight:500}
+
+/* sections */
+section{padding-block:72px;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:32px}
+.file{font:500 12.5px var(--f-mono);color:var(--muted);border:1px solid var(--line);padding:3px 9px;border-radius:4px;background:var(--panel)}
+h2{font:700 clamp(28px,4vw,40px)/1.1 var(--f-display);margin:0;text-wrap:balance}
+h3{font:600 20px/1.25 var(--f-display);margin:0;text-wrap:balance}
+.label{font:500 11.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* code panel */
+.code{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow-x:auto}
+.code pre{margin:0;padding:20px 22px;font:13.5px/1.75 var(--f-mono);counter-reset:ln}
+.code .ln{display:block;white-space:pre-wrap}
+.code .ln::before{counter-increment:ln;content:counter(ln);display:inline-block;width:2.4ch;margin-right:2ch;color:#3d4970;text-align:right}
+.about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:start}
+.about-grid>*{min-width:0}
+.facts{display:grid;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.fact{display:flex;justify-content:space-between;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.fact:last-child{border-bottom:0}
+.fact .v{font:600 15px var(--f-mono);text-align:right}
+
+/* stack */
+.deps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.dep{border:1px solid var(--line);border-radius:8px;padding:18px;background:var(--panel)}
+.dep h3{font:600 13px var(--f-mono);color:var(--accent);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:12.5px var(--f-mono);padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--fg)}
+.chip i{font-style:normal;color:var(--muted)}
+.dep h3{display:flex;align-items:center;gap:8px}
+.dep h3 .hi{width:16px;height:16px}
+#stack .deps{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.sk{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:8px}
+.s{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);font:12.5px/1.3 var(--f-mono);min-width:0;transition:border-color .2s,transform .2s}
+.s span{min-width:0;overflow-wrap:break-word}
+.s svg{flex:none;width:26px;height:26px;padding:4px;border-radius:5px;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.dep:nth-child(2) .s svg{color:var(--ball);background:color-mix(in srgb,var(--ball) 12%,transparent)}
+.dep:nth-child(3) .s svg{color:#c792ea;background:color-mix(in srgb,#c792ea 14%,transparent)}
+.dep:nth-child(4) .s svg{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.s:hover{border-color:var(--accent);transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){.s{transition:none}.s:hover{transform:none}}
+
+/* experience: git log */
+.log{list-style:none;margin:0;padding:0;position:relative}
+.log::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.log li{position:relative;padding-left:34px;padding-bottom:18px}
+.log li::before{content:"";position:absolute;left:1px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.log li.head::before{background:var(--ball);border-color:var(--ball)}
+.log .hash{font:12.5px var(--f-mono);color:var(--ball)}
+.log .msg{font:14.5px var(--f-mono)}
+.job-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;margin-bottom:22px}
+.job-top .co{color:var(--muted)}
+.pill{font:600 11.5px var(--f-mono);padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 40%,transparent)}
+
+/* project */
+.proj{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.proj>*{min-width:0}
+.feat{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:12px}
+.feat li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}
+.feat code{font:12px var(--f-mono);color:var(--accent);border:1px solid var(--line);padding:1px 7px;border-radius:4px;white-space:nowrap}
+.deploys{margin-top:26px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.deploy{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:11px 16px;border-bottom:1px solid var(--line);font:13px var(--f-mono)}
+.deploy:last-child{border-bottom:0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.deploy a{overflow-wrap:anywhere}
+.deploy .org{color:var(--muted);font-size:12px;text-align:right}
+.bracket-box{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
+.bracket-box svg{width:100%;height:auto;display:block}
+.bracket-cap{font:12px var(--f-mono);color:var(--muted);margin-top:10px}
+
+/* athlete */
+.athlete{background:radial-gradient(900px 400px at 85% 0%,color-mix(in srgb,var(--ball) 10%,transparent),transparent 70%)}
+.ath-intro{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:start;margin-bottom:36px}
+.ath-intro>*{min-width:0}
+.ath-intro p{margin:0 0 14px;max-width:62ch}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.stat{background:var(--panel);padding:18px}
+.stat .n{font:700 32px/1 var(--f-display);color:var(--ball);font-variant-numeric:tabular-nums}
+.stat .t{font:12px var(--f-mono);color:var(--muted);margin-top:6px}
+.ath-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start}
+.ath-grid>*{min-width:0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}
+.panel h3{margin-bottom:4px}
+.panel .sub{font:12px var(--f-mono);color:var(--muted);margin:0 0 14px}
+#rankChart{width:100%;height:auto;display:block}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font:13px var(--f-mono);font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}
+th{font-weight:500;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+td.r,th.r{text-align:right}
+td .best{color:var(--ball);font-weight:700}
+.bar-cell{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.bar-cell span.b{display:inline-block;height:6px;border-radius:3px;background:var(--accent)}
+.src{font:12px var(--f-mono);color:var(--muted);margin-top:14px}
+.src a{color:var(--muted);text-decoration:underline}
+
+/* feature visuals (shared by both views, colored by tokens) */
+.mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;margin-top:32px}
+.mod{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.mod .label{text-transform:none;letter-spacing:0;color:var(--accent);overflow-wrap:anywhere}
+.mod-cap{margin:0;font:12.5px/1.5 var(--f-mono);color:var(--muted)}
+.mod-note{font:12px var(--f-mono);color:var(--muted);margin:14px 0 0}
+.viz{width:100%;height:auto;display:block}
+.viz text{font-family:var(--f-mono);fill:var(--fg)}
+:root[data-mode="human"] .viz text{font-family:var(--f-body)}
+.viz .t-muted{fill:var(--muted)}
+.viz .t-ball{fill:var(--ball)}
+.viz .t-white{fill:var(--on-table)}
+.viz .t-band{fill:var(--on-accent)}
+.viz .t-ink{fill:var(--paper-ink)}
+.viz .t-ink-m{fill:var(--paper-ink);opacity:.6}
+.viz .bx{fill:var(--bg);stroke:var(--line);stroke-width:1.5}
+.viz .bx.win{stroke:var(--ball);stroke-width:2}
+.viz .bx.champ{fill:var(--ball);stroke:var(--ball)}
+.viz .ln{fill:none;stroke:var(--accent);stroke-opacity:.45;stroke-width:1.5}
+.viz .ln.win{stroke:var(--ball);stroke-opacity:1;stroke-width:2.2}
+.viz .grid{stroke:var(--line);stroke-width:1}
+.viz .slot-done{fill:var(--line)}
+.viz .slot-live{fill:var(--ball)}
+.viz .slot-up{fill:color-mix(in srgb,var(--accent) 12%,transparent);stroke:var(--accent);stroke-width:1.3}
+.viz .now{stroke:var(--ball);stroke-width:2;stroke-dasharray:5 4}
+.viz .printer{fill:var(--deck);stroke:var(--line);stroke-width:1.5}
+.viz .slot{fill:var(--keyside)}
+.viz .paper{fill:var(--paper);stroke:var(--line);stroke-width:1}
+.viz .band{fill:var(--accent)}
+.viz .rule{stroke:var(--paper-ink);stroke-opacity:.18;stroke-width:1}
+.viz .sig{stroke:var(--paper-ink);stroke-opacity:.5;stroke-width:1.2}
+.viz .hl{fill:var(--ball);fill-opacity:.12}
+.viz .led{fill:var(--ok)}
+.viz .sheet.go{animation:feed 1.8s cubic-bezier(.2,.7,.2,1) both}
+@keyframes feed{from{transform:translateY(-250px)}to{transform:translateY(0)}}
+.works-h{margin:44px 0 0;font:800 italic 28px/1 var(--f-display)!important;text-transform:uppercase}
+.works{display:grid;gap:28px;margin-top:22px}
+.work{display:grid;grid-template-columns:1.1fr 1fr;gap:20px 40px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
+.work>*{min-width:0}
+.work:nth-child(even) .work-viz{order:2}
+.work-viz{background:var(--bg);border-radius:12px;padding:14px}
+.work-text h3{font:800 italic clamp(30px,3.6vw,40px)/1 var(--f-display)!important;text-transform:uppercase;margin:14px 0 10px}
+.work-text p{margin:0;color:var(--muted);max-width:52ch}
+.step{display:flex;align-items:center;gap:12px}
+.mini{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px;font-size:15px}
+.mini li{padding-left:24px;position:relative}
+.mini li::before{content:"";position:absolute;left:0;top:.45em;width:14px;height:8px;border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);transform:rotate(-45deg)}
+@media (max-width:860px){.work{grid-template-columns:1fr;padding:16px}.work:nth-child(even) .work-viz{order:0}}
+@media (prefers-reduced-motion:reduce){.viz .sheet.go{animation:none}}
+
+/* PVL project */
+.pvl-dev{display:grid;grid-template-columns:1fr 1.35fr;gap:28px;align-items:start}
+.pvl-dev>*{min-width:0}
+.browser{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.br-top{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.br-dots{display:flex;gap:6px;flex:none}
+.br-dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.br-dots i:first-child{background:var(--ball)}
+.br-url{flex:1;min-width:0;font:12px var(--f-mono);color:var(--muted);background:var(--bg);border-radius:6px;padding:6px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br-tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:none}
+.br-tabs button{font:500 12.5px var(--f-mono);color:var(--muted);background:none;border:0;border-bottom:2px solid transparent;padding:10px 14px;cursor:pointer;white-space:nowrap}
+.br-tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--ball)}
+.zoomable{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.zoomable img{display:block;width:100%;height:auto}
+.br-shot img{aspect-ratio:1897/911;object-fit:cover;object-position:top}
+.br-cap{margin:0;padding:10px 14px;font:12px var(--f-mono);color:var(--muted);border-top:1px solid var(--line)}
+.gal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:32px}
+.shot{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.shot .zoomable{border-bottom:1px solid var(--line);overflow:hidden}
+.code.nw .ln{white-space:pre}
+.shot img{aspect-ratio:1897/911;object-fit:cover;object-position:top;transition:transform .35s}
+.shot .zoomable:hover img{transform:scale(1.03)}
+.shot figcaption{padding:18px 20px 20px}
+.shot h3{margin:0 0 6px}
+.shot p{margin:0;color:var(--muted);font-size:15px}
+.lightbox{position:fixed;inset:0;z-index:50;background:color-mix(in srgb,#000 82%,transparent);display:grid;place-items:center;padding:24px;cursor:zoom-out}
+.lightbox img{max-width:min(1400px,100%);max-height:88vh;border-radius:8px;box-shadow:0 20px 60px #0008}
+.lightbox .lb-close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;font:600 14px var(--f-body);color:#fff;background:#ffffff22;border:1px solid #ffffff44;border-radius:999px;padding:8px 14px;cursor:pointer}
+@media (max-width:860px){.pvl-dev,.gal{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.shot img{transition:none}.shot .zoomable:hover img{transform:none}}
+
+/* education */
+.degree{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px 32px;position:relative;overflow:hidden}
+.degree::before{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:color-mix(in srgb,var(--accent) 8%,transparent);pointer-events:none}
+.degree>*{position:relative;min-width:0}
+.cap{width:104px;height:104px;border-radius:24px;display:grid;place-items:center;background:var(--accent);color:var(--on-accent);box-shadow:0 12px 28px color-mix(in srgb,var(--accent) 30%,transparent)}
+.cap svg{width:60px;height:60px}
+.deg-kicker{display:block;font:600 12.5px var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ball);margin-bottom:6px}
+.deg-kicker .mono{letter-spacing:0;text-transform:none;font-size:13px}
+.degree h3{font:700 clamp(22px,3vw,30px)/1.15 var(--f-display);margin:0}
+:root[data-mode="human"] .degree h3{font:800 italic clamp(28px,4vw,40px)/1 var(--f-display);text-transform:uppercase}
+.deg-meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px;color:var(--muted)}
+.deg-meta span{display:inline-flex;align-items:center;gap:7px}
+.deg-meta svg{width:17px;height:17px;color:var(--accent)}
+.deg-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.diploma{width:200px;height:auto;flex:none}
+.diploma .paper{fill:var(--bg);stroke:var(--line);stroke-width:2}
+.diploma .roll{fill:var(--panel);stroke:var(--muted);stroke-width:2}
+.diploma .roll-in{fill:var(--line)}
+.diploma .ink{fill:none;stroke:var(--muted);stroke-width:3;stroke-linecap:round;opacity:.6}
+.diploma .ribbon,.diploma .ribbon-tail{fill:var(--ball)}
+.diploma .seal{fill:var(--ball);stroke:var(--panel);stroke-width:3}
+.diploma .seal-in{fill:none;stroke:var(--panel);stroke-width:2}
+@media (max-width:860px){
+  .degree{grid-template-columns:auto 1fr;padding:22px}
+  .diploma{display:none}
+  .cap{width:72px;height:72px;border-radius:18px}
+  .cap svg{width:42px;height:42px}
+}
+@media (max-width:480px){.degree{grid-template-columns:1fr}}
+
+/* contact */
+.edu{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;align-items:baseline}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px}
+.ccard{border:1px solid var(--line);border-radius:8px;padding:20px;background:var(--panel);display:flex;flex-direction:column;gap:12px}
+.ccard .val{font:600 clamp(15px,2.2vw,19px) var(--f-mono);user-select:all;overflow-wrap:anywhere}
+.ccard .row{display:flex;gap:10px;flex-wrap:wrap}
+.toast{font:12px var(--f-mono);color:var(--ok);min-height:1.4em}
+footer{padding-block:28px;font:12px var(--f-mono);color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* header toggle */
+.bar .wrap{flex-wrap:wrap;column-gap:20px;row-gap:0}
+.mode-toggle{display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--panel);gap:2px;flex:none}
+.mode-toggle button{display:inline-flex;align-items:center;gap:6px;font:600 12.5px var(--f-body);color:var(--muted);background:transparent;border:0;border-radius:999px;padding:7px 13px;cursor:pointer}
+.mode-toggle button svg{width:15px;height:15px}
+.mode-toggle button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+.brand .only-human{font:700 italic 22px var(--f-display);text-transform:uppercase;letter-spacing:.02em;display:inline-flex;align-items:center;gap:8px}
+.brand .bdot{width:10px;height:10px;border-radius:50%;background:var(--ball)}
+:root[data-mode="human"] .tabs a{font:600 13.5px var(--f-body)}
+:root[data-mode="human"] .btn{font:600 14px var(--f-body);border-radius:999px;padding:12px 20px}
+:root[data-mode="human"] h2{font-weight:800;font-style:italic;text-transform:uppercase;font-size:clamp(36px,5.5vw,58px);line-height:.95;letter-spacing:.005em}
+:root[data-mode="human"] h3{font-family:var(--f-body);font-weight:600}
+:root[data-mode="human"] .label{font-family:var(--f-body)}
+.kicker{font:600 13px var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ball);margin:0 0 8px}
+.intro{color:var(--muted);max-width:62ch;margin:14px 0 0;font-size:17px}
+
+/* human hero */
+.hhero{border-bottom:1px solid var(--line);background:radial-gradient(700px 320px at 92% -10%,color-mix(in srgb,var(--ball) 16%,transparent),transparent 70%)}
+.hhero .wrap{padding-block:48px 56px}
+.hhero-top{display:grid;grid-template-columns:1.5fr 1fr;gap:20px 48px;align-items:end}
+.hhero-top>*{min-width:0}
+.hhero h1{font:800 italic clamp(52px,8vw,96px)/.88 var(--f-display);text-transform:uppercase;margin:0}
+.hhero h1 span{color:var(--accent)}
+.hhero .lede{color:var(--muted);font-size:18px;max-width:46ch;margin:0 0 22px}
+.kb{margin-top:40px;max-width:1000px;margin-inline:auto;filter:drop-shadow(0 18px 30px color-mix(in srgb,var(--fg) 14%,transparent))}
+.screen{background:var(--fg);color:var(--bg);border-radius:14px 14px 0 0;padding:16px 22px;display:flex;align-items:center;gap:14px;min-height:76px}
+.screen .dots{display:flex;gap:6px;flex:none}
+.screen .dots i{width:9px;height:9px;border-radius:50%;background:color-mix(in srgb,var(--bg) 30%,transparent)}
+.screen .dots i:first-child{background:var(--ball)}
+.screen .txt{font:800 italic clamp(24px,4.6vw,46px)/1.05 var(--f-display);text-transform:uppercase;letter-spacing:.01em;min-width:0;overflow-wrap:anywhere}
+.screen .caret{display:inline-block;width:.42em;height:.9em;background:var(--ball);vertical-align:-0.08em;margin-left:4px;animation:blink 1s steps(1) infinite}
+#keys{display:block;width:100%;aspect-ratio:156/56;max-width:100%;border-radius:0 0 14px 14px;background:var(--deck);touch-action:manipulation;cursor:pointer}
+.kb-hint{font-size:13px;color:var(--muted);text-align:center;margin-top:14px}
+
+/* human sections */
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.side{border-radius:16px;padding:30px;border:1px solid var(--line);background:var(--panel);min-width:0;position:relative}
+.side.table{background:var(--table);color:var(--on-table);border-color:transparent;box-shadow:inset 0 0 0 8px var(--table),inset 0 0 0 10px color-mix(in srgb,var(--on-table) 75%,transparent)}
+.side .kicker{color:var(--ball)}
+.side.table .kicker{color:var(--on-table);opacity:.85}
+.side h3{font:800 italic 40px/1 var(--f-display)!important;text-transform:uppercase;margin:0}
+.side ul{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.side li{padding-left:24px;position:relative}
+.side li::before{content:"";position:absolute;left:0;top:.72em;width:12px;height:2px;background:var(--accent)}
+.side.table li::before{background:var(--on-table)}
+.side .pp{position:absolute;right:30px;top:30px;width:22px;height:22px;border-radius:50%;background:var(--ball);animation:bounce 1.4s cubic-bezier(.5,0,.5,1) infinite alternate}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(26px)}}
+.side .tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tag{font:500 12.5px var(--f-body);padding:4px 11px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.side.table .tag{border-color:color-mix(in srgb,var(--on-table) 40%,transparent);color:var(--on-table)}
+.regions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;margin-top:28px}
+.region{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.region .where{font:800 italic 30px/1 var(--f-display);text-transform:uppercase}
+.region .who{color:var(--muted);font-size:14px}
+.region a{font-weight:600;font-size:14px;margin-top:10px}
+.does{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px;margin-top:36px}
+.do{display:flex;gap:14px;align-items:flex-start}
+.do p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.ic{flex:none;width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent)}
+.ic svg{width:24px;height:24px}
+.abil{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px}
+.ab{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px;transition:transform .2s,border-color .2s}
+.ab:hover{transform:translateY(-3px);border-color:var(--accent)}
+.ab p{margin:0;color:var(--muted);font-size:15px}
+.ab .tools{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin-top:auto}
+.ab .tools b{color:var(--fg);font-weight:600}
+.board{display:grid;grid-template-columns:repeat(4,1fr);background:var(--fg);color:var(--bg);border-radius:16px;overflow:hidden}
+.board>div{padding:24px;border-right:1px solid color-mix(in srgb,var(--bg) 14%,transparent);min-width:0}
+.board>div:last-child{border-right:0}
+.board .n{font:800 italic clamp(40px,6vw,66px)/1 var(--f-display);color:var(--ball);text-transform:uppercase}
+.board .t{font-size:14px;opacity:.8;margin-top:8px}
+.journey{list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(5,1fr)}
+.journey li{position:relative;padding:34px 18px 0 0;min-width:0}
+.journey li::before{content:"";position:absolute;left:0;right:0;top:8px;height:2px;background:var(--line)}
+.journey li::after{content:"";position:absolute;left:0;top:1px;width:16px;height:16px;border-radius:50%;background:var(--panel);border:3px solid var(--accent);box-sizing:border-box}
+.journey li.best::after{background:var(--ball);border-color:var(--ball)}
+.journey .y{font:800 italic 32px/1 var(--f-display)}
+.journey p{margin:8px 0 0;color:var(--muted);font-size:14.5px}
+.journey p b{color:var(--fg)}
+.h-src{font-size:12.5px;color:var(--muted);margin-top:28px}
+.h-src a{color:var(--muted);text-decoration:underline}
+@media (max-width:860px){
+  .hhero-top,.sides{grid-template-columns:1fr}
+  .board{grid-template-columns:1fr 1fr}
+  .board>div:nth-child(2){border-right:0}
+  .board>div:nth-child(-n+2){border-bottom:1px solid color-mix(in srgb,var(--bg) 14%,transparent)}
+  .journey{grid-template-columns:1fr}
+  .journey li{padding:0 0 22px 34px}
+  .journey li::before{left:7px;right:auto;top:0;bottom:0;width:2px;height:auto}
+  .mode-toggle{order:-1;margin-block:10px 2px}
+  .tabs{flex-basis:100%}
+}
+@media (prefers-reduced-motion:reduce){.side .pp,.screen .caret{animation:none}.ab{transition:none}.ab:hover{transform:none}}
+
+@media (max-width:860px){
+  .hero .wrap,.about-grid,.proj,.ath-intro,.ath-grid{grid-template-columns:1fr}
+  .stage{order:-1;aspect-ratio:16/11;margin-inline:-8px}
+  .hero .wrap{padding-block:24px 40px}
+  section{padding-block:56px}
+  .brand{display:none}
+  .tabs{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .role .cursor{animation:none}
+}
+</style>
+
+</head>
+<body>
+<script>
+(function(){var h=(location.hash||'').slice(1),m='human';
+if(h==='dev'||h==='developer')m='dev';else if(h==='everyone')m='human';else{try{var s=localStorage.getItem('pf-mode');if(s==='dev'||s==='human')m=s;}catch(e){}}
+document.documentElement.setAttribute('data-mode',m);})();
+</script>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="g" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></g>
+  </defs>
+  <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7.5 14h3M13.5 14h3M7.5 17.5h3"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8V3h10v5"/><rect x="3" y="8" width="18" height="9" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+  <symbol id="i-bracket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h5v6H3M3 14h5v6H3M8 7h4v10H8M12 12h5"/><circle cx="19.5" cy="12" r="2.2"/></symbol>
+  <symbol id="i-ts" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5c-2 0-2.5 1-2.5 3v1.5c0 1-.5 2-1.5 2.5 1 .5 1.5 1.5 1.5 2.5V16c0 2 .5 3 2.5 3"/><path d="M17 5c2 0 2.5 1 2.5 3v1.5c0 1 .5 2 1.5 2.5-1 .5-1.5 1.5-1.5 2.5V16c0 2-.5 3-2.5 3"/><path d="M9 9h6M12 9v7"/></symbol>
+  <symbol id="i-js" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5c-2 0-2.5 1-2.5 3v1.5c0 1-.5 2-1.5 2.5 1 .5 1.5 1.5 1.5 2.5V16c0 2 .5 3 2.5 3"/><path d="M17 5c2 0 2.5 1 2.5 3v1.5c0 1 .5 2 1.5 2.5-1 .5-1.5 1.5-1.5 2.5V16c0 2-.5 3-2.5 3"/><circle cx="9" cy="12" r=".6" fill="currentColor"/><circle cx="12" cy="12" r=".6" fill="currentColor"/><circle cx="15" cy="12" r=".6" fill="currentColor"/></symbol>
+  <symbol id="i-html" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4.5l-3 15"/></symbol>
+  <symbol id="i-css" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.3 0 1.6-1.1 1-2.1-.6-1 0-2.4 1.5-2.4H17a4 4 0 0 0 4-4C21 7 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10.5" cy="7" r="1"/><circle cx="15.5" cy="8" r="1"/></symbol>
+  <symbol id="i-ng" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M6 16v-4h12v4"/></symbol>
+  <symbol id="i-react" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18.5 3v4h-4M5.5 21v-4h4"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 14.5h7M13 12.5l2 2-2 2"/></symbol>
+  <symbol id="i-node" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 10l3 2.5L7 15M12.5 15.5H17"/></symbol>
+  <symbol id="i-scss" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9M7.5 9.5H16M7.5 14H16M11 18.5h9"/><path d="M4 5v4.5h3.5M7.5 14v4.5H11" stroke-opacity=".5"/></symbol>
+  <symbol id="i-tw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.2"/><rect x="14" y="3" width="7" height="7" rx="1.2"/><rect x="3" y="14" width="7" height="7" rx="1.2"/><path d="M14 17.5h7M17.5 14v7"/></symbol>
+  <symbol id="i-resp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="10" rx="1.5"/><path d="M6 18.5h6M9 14v4.5"/><rect x="17.5" y="9" width="4.5" height="11" rx="1"/></symbol>
+  <symbol id="i-api" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2.5v4.5M15 2.5v4.5M6 7h12v3.5a6 6 0 0 1-12 0V7zM12 16.5V21.5"/></symbol>
+  <symbol id="i-perf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 18a9 9 0 1 1 17 0"/><path d="M12 15l4.5-5.5"/><circle cx="12" cy="15" r="1.3"/></symbol>
+  <symbol id="i-comp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 16.5l9 5 9-5"/></symbol>
+  <symbol id="i-rev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="7"/><path d="M20.5 20.5l-5-5M7.5 10.5l2 2 4-4"/></symbol>
+</svg>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="brand"><span class="only-dev">~/divyanshu<b>.dev</b></span><span class="only-human"><i class="bdot"></i>Divyanshu Lingwal</span></div>
+    <nav class="tabs only-human" aria-label="Sections">
+      <a href="#h-sides">About</a>
+      <a href="#h-work">My work</a>
+      <a href="#h-pvl">Volleyball</a>
+      <a href="#h-skills">Skills</a>
+      <a href="#h-tt">Table tennis</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <nav class="tabs only-dev" aria-label="Sections">
+      <a href="#about">about.ts</a>
+      <a href="#stack">stack.json</a>
+      <a href="#experience">git log</a>
+      <a href="#projects">ems-ott/</a>
+      <a href="#pvl">pvl/</a>
+      <a href="#athlete">athlete.mode</a>
+      <a href="#contact">contact.sh</a>
+    </nav>
+    <div class="mode-toggle" role="group" aria-label="View mode">
+      <button type="button" id="m-human" data-set="human" aria-pressed="true"><svg><use href="#i-user"/></svg>Everyone</button>
+      <button type="button" id="m-dev" data-set="dev" aria-pressed="false"><svg><use href="#i-html"/></svg>Developer</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="mode-human">
+  <div class="hhero">
+    <div class="wrap">
+      <div class="hhero-top">
+        <div>
+          <p class="kicker">Frontend Developer · Table Tennis Athlete</p>
+          <h1>Hi, I'm<br><span>Divyanshu</span></h1>
+        </div>
+        <div>
+          <p class="lede">I build websites and web apps that are fast, clear and easy to use. Away from the screen, I play competitive table tennis for Haryana.</p>
+          <div class="cta">
+            <a class="btn primary" href="#h-work">See my work</a>
+            <a class="btn" href="#contact">Contact me</a>
+          </div>
+        </div>
+      </div>
+      <div class="kb">
+        <div class="screen" aria-live="off"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="txt"><span id="scrText">Divyanshu Lingwal</span><span class="caret" aria-hidden="true"></span></span></div>
+        <canvas id="keys" aria-label="Animated keyboard typing Divyanshu's name. Tap a key to type."></canvas>
+      </div>
+      <p class="kb-hint">Tap a key, or type on your own keyboard.</p>
+    </div>
+  </div>
+
+  <section id="h-sides">
+    <div class="wrap">
+      <p class="kicker">About me</p>
+      <h2>Two sides, same focus</h2>
+      <p class="intro">I spend my days building software for table tennis and my evenings playing it. Both need speed, precision and practice.</p>
+      <div class="sides" style="margin-top:32px">
+        <div class="side">
+          <p class="kicker">At the keyboard</p>
+          <h3>Web Developer</h3>
+          <ul>
+            <li>Frontend Developer at Stupa Sports Analytics since July 2024</li>
+            <li>Built a live-streaming and tournament platform now used by four international table tennis federations</li>
+            <li>Makes websites load fast and work on phones, tablets and computers</li>
+            <li>Reviews teammates' work and mentors newer developers</li>
+          </ul>
+          <div class="tagrow"><span class="tag">2 years experience</span><span class="tag">BCA graduate</span><span class="tag">Delhi, India</span></div>
+        </div>
+        <div class="side table">
+          <span class="pp" aria-hidden="true"></span>
+          <p class="kicker">At the table</p>
+          <h3>Table Tennis Athlete</h3>
+          <ul>
+            <li>Playing competitive table tennis since 2019</li>
+            <li>Represents Haryana in national tournaments</li>
+            <li>Ranked #6 in Haryana men's singles in 2024</li>
+            <li>In the state's top 12 every season since 2023</li>
+          </ul>
+          <div class="tagrow"><span class="tag">Team Haryana</span><span class="tag">Fatehabad district</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="h-work">
+    <div class="wrap">
+      <p class="kicker">My work</p>
+      <h2>The platform behind the matches</h2>
+      <p class="intro">I built the website and streaming platform that table tennis federations use to run their tournaments and show matches to fans. Today it is live in four regions.</p>
+      <div class="regions">
+        <div class="region"><span class="where">Europe</span><span class="who">European Table Tennis Union</span><a href="https://ettu.tv" target="_blank" rel="noopener">ettu.tv ↗</a></div>
+        <div class="region"><span class="where">Sweden</span><span class="who">Swedish Table Tennis Association</span><a href="https://sbtfeventsott.stupaevents.com" target="_blank" rel="noopener">Visit site ↗</a></div>
+        <div class="region"><span class="where">Australia</span><span class="who">Table Tennis Australia</span><a href="https://ttaott.stupaevents.com" target="_blank" rel="noopener">Visit site ↗</a></div>
+        <div class="region"><span class="where">New Zealand</span><span class="who">Table Tennis New Zealand</span><a href="https://ttnz.stupaevents.com" target="_blank" rel="noopener">Visit site ↗</a></div>
+      </div>
+      <h3 class="works-h">What it does, step by step</h3>
+      <div class="works">
+        <div class="work">
+          <div class="work-viz"><svg class="viz" data-viz="draw" data-flavor="human" viewBox="0 0 420 300" role="img" aria-label="Example tournament bracket: eight players, the winner's path highlighted in orange"></svg></div>
+          <div class="work-text">
+            <div class="step"><span class="ic"><svg><use href="#i-bracket"/></svg></span><span class="kicker" style="margin:0">Step 1 · Before the event</span></div>
+            <h3>Creates the draw</h3>
+            <p>Organisers enter the players, and the platform builds the bracket: who plays whom in every round, from the first match to the final. It supports several tournament formats, so nobody has to draw it up by hand.</p>
+            <ul class="mini"><li>Works for different tournament formats</li><li>Moves winners forward round by round</li></ul>
+          </div>
+        </div>
+        <div class="work">
+          <div class="work-viz"><svg class="viz" data-viz="schedule" data-flavor="human" viewBox="0 0 420 300" role="img" aria-label="Example match-day schedule: matches placed on four tables across the morning"></svg></div>
+          <div class="work-text">
+            <div class="step"><span class="ic"><svg><use href="#i-cal"/></svg></span><span class="kicker" style="margin:0">Step 2 · On match day</span></div>
+            <h3>Schedules every match</h3>
+            <p>It plans which match is played on which table and at what time. That way many matches can run across many tables without clashes, and organisers can keep the day on track.</p>
+            <ul class="mini"><li>Assigns matches to tables and time slots</li><li>Helps organisers manage changes during the day</li></ul>
+          </div>
+        </div>
+        <div class="work">
+          <div class="work-viz"><svg class="viz" data-viz="sheet" data-flavor="human" viewBox="0 0 420 300" role="img" aria-label="Example printed scoresheet for a quarter-final match"></svg></div>
+          <div class="work-text">
+            <div class="step"><span class="ic"><svg><use href="#i-print"/></svg></span><span class="kicker" style="margin:0">Step 3 · At the table</span></div>
+            <h3>Prints scoresheets</h3>
+            <p>For each match, it produces the official scoresheet, ready to print and hand to the umpire, who records the score game by game.</p>
+            <ul class="mini"><li>One sheet per match, ready to print</li><li>Event, table and players already filled in</li></ul>
+          </div>
+        </div>
+      </div>
+      <p class="h-src">Illustrations use example data.</p>
+    </div>
+  </section>
+
+  <section id="h-pvl">
+    <div class="wrap">
+      <p class="kicker">Project 2 · Volleyball</p>
+      <h2>Match center for the Prime Volleyball League</h2>
+      <p class="intro">I developed the match center for India's Prime Volleyball League. It's the place fans go to follow every match, check the standings and see which players are leading the league.</p>
+      <div class="gal">
+        <figure class="shot">
+          <button type="button" class="zoomable" aria-label="Enlarge: league leaders"><img src="pvl/statistics.jpg" alt="Statistics page with the season's best scorer, best attacker and best blocker" width="1897" height="911" loading="lazy"></button>
+          <figcaption><h3>See the league leaders</h3><p>Top scorers, attackers and blockers of the season, with player photos and the chasing pack below.</p></figcaption>
+        </figure>
+        <figure class="shot">
+          <button type="button" class="zoomable" aria-label="Enlarge: full rankings"><img src="pvl/leaderboard.jpg" alt="Best scorer ranking list with points and matches played" width="1899" height="904" loading="lazy"></button>
+          <figcaption><h3>Full rankings by skill</h3><p>Switch between best scorer, attacker, blocker, server and setter, for any season.</p></figcaption>
+        </figure>
+        <figure class="shot">
+          <button type="button" class="zoomable" aria-label="Enlarge: fixtures and results"><img src="pvl/fixtures.jpg" alt="Fixtures and results page with completed knockout matches and set scores" width="1898" height="908" loading="lazy"></button>
+          <figcaption><h3>Follow every fixture</h3><p>Live, upcoming and completed matches, with set-by-set scores, filtered by season, stage and team.</p></figcaption>
+        </figure>
+        <figure class="shot">
+          <button type="button" class="zoomable" aria-label="Enlarge: match result"><img src="pvl/match-result.jpg" alt="Match result page: Bengaluru Torpedoes beat Mumbai Meteors 3-0, with team comparison stats" width="1903" height="914" loading="lazy"></button>
+          <figcaption><h3>Relive any match</h3><p>Final score, each set's score and a side-by-side comparison of the two teams.</p></figcaption>
+        </figure>
+      </div>
+      <p class="h-src">Also includes team stats and league standings. <a href="https://pvl.stupaevents.com/match-center/statistics" target="_blank" rel="noopener">Open the match center ↗</a></p>
+    </div>
+  </section>
+
+  <section id="h-skills">
+    <div class="wrap">
+      <p class="kicker">Skills</p>
+      <h2>What I'm good at</h2>
+      <p class="intro" style="margin-bottom:32px">In plain words, with the tools I use for each.</p>
+      <div class="abil">
+        <div class="ab"><span class="ic"><svg><use href="#i-ng"/></svg></span><h3>Building web apps</h3><p>Interactive screens, dashboards and tools that people use every day.</p><div class="tools"><b>Tools:</b> Angular, React, Next.js, TypeScript, JavaScript</div></div>
+        <div class="ab"><span class="ic"><svg><use href="#i-resp"/></svg></span><h3>Works on every screen</h3><p>Layouts that look right on a phone, a tablet and a large monitor.</p><div class="tools"><b>Tools:</b> HTML, CSS, SCSS, Tailwind CSS</div></div>
+        <div class="ab"><span class="ic"><svg><use href="#i-perf"/></svg></span><h3>Fast and smooth</h3><p>Pages that load quickly and stay responsive, even with lots of data.</p><div class="tools"><b>Skill:</b> Performance optimization</div></div>
+        <div class="ab"><span class="ic"><svg><use href="#i-api"/></svg></span><h3>Connecting to live data</h3><p>Bringing scores, schedules and results from servers onto the screen.</p><div class="tools"><b>Skill:</b> API integration, Node.js libraries</div></div>
+        <div class="ab"><span class="ic"><svg><use href="#i-comp"/></svg></span><h3>Consistent design</h3><p>One shared set of buttons, tables and forms, so every page feels like the same product.</p><div class="tools"><b>Skill:</b> Reusable component libraries</div></div>
+        <div class="ab"><span class="ic"><svg><use href="#i-rev"/></svg></span><h3>Raising the team's quality</h3><p>Reviewing code before it ships and helping newer developers grow.</p><div class="tools"><b>Skill:</b> Code reviews, mentoring</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="h-tt">
+    <div class="wrap">
+      <p class="kicker">Table tennis</p>
+      <h2>On the table</h2>
+      <p class="intro" style="margin-bottom:32px">I have played competitively since 2019. I represent Haryana at national tournaments and have played against some of India's top-ranked players. In the state, I compete in every ranking championship each season.</p>
+      <div class="board">
+        <div><div class="n">#6</div><div class="t">Haryana men's singles ranking, 2024</div></div>
+        <div><div class="n">Top 12</div><div class="t">In the state, every season since 2023</div></div>
+        <div><div class="n">2019</div><div class="t">Started playing competitively</div></div>
+        <div><div class="n">HR</div><div class="t">Represents Haryana nationally</div></div>
+      </div>
+      <ol class="journey">
+        <li><div class="y">2019</div><p>Started competing in table tennis</p></li>
+        <li><div class="y">2023</div><p><b>#6</b> in Haryana under-19 boys, <b>#11</b> in men's singles</p></li>
+        <li class="best"><div class="y">2024</div><p><b>#6</b> in Haryana men's singles, my best season so far</p></li>
+        <li><div class="y">2025</div><p><b>#12</b> in Haryana men's singles</p></li>
+        <li><div class="y">2026</div><p><b>#10</b> after the first ranking event of the season</p></li>
+      </ol>
+      <p class="h-src">Rankings from the Haryana Table Tennis Association's official lists.</p>
+    </div>
+  </section>
+</div>
+
+<div class="mode-dev">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="prompt"><span>➜</span> divyanshu@delhi:~$ <span class="c-fn">npm run</span> portfolio</p>
+        <h1>Divyanshu<br><span class="last">Lingwal</span></h1>
+        <p class="role" aria-live="polite"><span id="typed">Frontend Developer</span><span class="cursor" aria-hidden="true"></span></p>
+        <p class="lede">I build sports-tech web apps in Angular and TypeScript. The tournament platform I built is used by four table tennis federations. Off the keyboard, I play competitive table tennis for Haryana.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">./view-projects</a>
+          <a class="btn" href="#athlete">./athlete-mode</a>
+          <a class="btn" href="#contact">./contact</a>
+        </div>
+      </div>
+      <div class="stage">
+        <canvas id="rally" aria-label="3D animation of a table tennis rally on a wireframe table"></canvas>
+        <div class="hud">rally.loop() · fps <b id="fps">60</b> · hits <b id="hits">0</b></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head"><span class="file">src/about.ts</span><h2>About</h2></div>
+      <div class="about-grid">
+        <div class="code"><pre><span class="ln"><span class="c-com">// Frontend Developer · 2 years in production</span></span><span class="ln"><span class="c-key">export const</span> developer = {</span><span class="ln">  name: <span class="c-str">"Divyanshu Lingwal"</span>,</span><span class="ln">  location: <span class="c-str">"Delhi, India"</span>,</span><span class="ln">  role: <span class="c-str">"Frontend Developer"</span>,</span><span class="ln">  company: <span class="c-str">"Stupa Sports Analytics"</span>,</span><span class="ln">  experienceYears: <span class="c-num">2</span>,</span><span class="ln">  domain: <span class="c-str">"sports-tech · tournament management · OTT"</span>,</span><span class="ln">  focus: [<span class="c-str">"API integration"</span>, <span class="c-str">"performance"</span>,</span><span class="ln">          <span class="c-str">"reusable component libraries"</span>, <span class="c-str">"responsive UI"</span>],</span><span class="ln">  alsoDoes: [<span class="c-str">"code reviews"</span>, <span class="c-str">"mentoring"</span>],</span><span class="ln">  sideQuest: <span class="c-str">"state-level table tennis athlete since 2019"</span>,</span><span class="ln">} <span class="c-key">as const</span>;</span></pre></div>
+        <div class="facts">
+          <div class="fact"><span class="label">Experience</span><span class="v">2 yrs</span></div>
+          <div class="fact"><span class="label">Federations served</span><span class="v">4</span></div>
+          <div class="fact"><span class="label">Main stack</span><span class="v">Angular · TS</span></div>
+          <div class="fact"><span class="label">Playing TT since</span><span class="v">2019</span></div>
+          <div class="fact"><span class="label">State</span><span class="v">Haryana</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="wrap">
+      <div class="sec-head"><span class="file">package.json → dependencies</span><h2>Stack</h2></div>
+      <div class="deps">
+        <div class="dep"><h3><svg class="hi"><use href="#i-html"/></svg>"languages"</h3><div class="sk">
+          <div class="s"><svg><use href="#i-ts"/></svg><span>TypeScript</span></div>
+          <div class="s"><svg><use href="#i-js"/></svg><span>JavaScript</span></div>
+          <div class="s"><svg><use href="#i-html"/></svg><span>HTML</span></div>
+          <div class="s"><svg><use href="#i-css"/></svg><span>CSS</span></div></div></div>
+        <div class="dep"><h3><svg class="hi"><use href="#i-ng"/></svg>"frameworks"</h3><div class="sk">
+          <div class="s"><svg><use href="#i-ng"/></svg><span>Angular</span></div>
+          <div class="s"><svg><use href="#i-react"/></svg><span>React</span></div>
+          <div class="s"><svg><use href="#i-next"/></svg><span>Next.js</span></div>
+          <div class="s"><svg><use href="#i-node"/></svg><span>Node.js libs</span></div></div></div>
+        <div class="dep"><h3><svg class="hi"><use href="#i-css"/></svg>"styling"</h3><div class="sk">
+          <div class="s"><svg><use href="#i-scss"/></svg><span>SCSS</span></div>
+          <div class="s"><svg><use href="#i-tw"/></svg><span>Tailwind CSS</span></div>
+          <div class="s"><svg><use href="#i-resp"/></svg><span>Responsive design</span></div></div></div>
+        <div class="dep"><h3><svg class="hi"><use href="#i-rev"/></svg>"practices"</h3><div class="sk">
+          <div class="s"><svg><use href="#i-api"/></svg><span>API integration</span></div>
+          <div class="s"><svg><use href="#i-perf"/></svg><span>Performance optimization</span></div>
+          <div class="s"><svg><use href="#i-comp"/></svg><span>Component libraries</span></div>
+          <div class="s"><svg><use href="#i-rev"/></svg><span>Code reviews</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head"><span class="file">$ git log --author="divyanshu"</span><h2>Experience</h2></div>
+      <div class="job-top">
+        <div><h3>Frontend Developer</h3><div class="co">Stupa Sports Analytics Private Limited</div></div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="mono" style="font-size:13px;color:var(--muted)">Jul 2024 → present</span><span class="pill">HEAD · active</span></div>
+      </div>
+      <ul class="log">
+        <li class="head"><span class="hash">c52e7d4</span> <span class="msg">feat(pvl): match center with stats, standings and results</span></li>
+        <li><span class="hash">a1f9e02</span> <span class="msg">feat: ship OTT platform for the Event Management System</span></li>
+        <li><span class="hash">7c3d5b1</span> <span class="msg">feat(api): integrate data APIs for tournament and event workflows</span></li>
+        <li><span class="hash">4e8a0c7</span> <span class="msg">perf: optimize frontend performance of production apps</span></li>
+        <li><span class="hash">92b61fd</span> <span class="msg">refactor(ui): build reusable component library across modules</span></li>
+        <li><span class="hash">0d5e3aa</span> <span class="msg">style: responsive layouts for desktop and mobile</span></li>
+        <li><span class="hash">b7714c9</span> <span class="msg">chore: code reviews and mentoring for the dev team</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head"><span class="file">projects/ems-ott/README.md</span><h2>Event Management System · OTT</h2></div>
+      <div class="proj">
+        <div>
+          <p style="margin:0;max-width:60ch">I built the OTT platform for Stupa's Event Management System from the ground up: application structure, UI design and business workflows. National and international table tennis federations use it to run and stream their events.</p>
+          <ul class="feat">
+            <li><code>draw.gen()</code><span>Draw-generation logic supporting multiple fixture types</span></li>
+            <li><code>scheduler</code><span>Match scheduler module to plan and manage tournament schedules</span></li>
+            <li><code>print()</code><span>Scoresheet printing for matches inside the EMS</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="label" style="margin-bottom:10px">deployments · status: live</div>
+          <div class="deploys" style="margin-top:0" aria-label="Live deployments">
+            <div class="deploy"><span class="dot"></span><a href="https://ettu.tv" target="_blank" rel="noopener">ettu.tv</a><span class="org">ETTU · Europe</span></div>
+            <div class="deploy"><span class="dot"></span><a href="https://sbtfeventsott.stupaevents.com" target="_blank" rel="noopener">sbtfeventsott.stupaevents.com</a><span class="org">SBTF · Sweden</span></div>
+            <div class="deploy"><span class="dot"></span><a href="https://ttaott.stupaevents.com" target="_blank" rel="noopener">ttaott.stupaevents.com</a><span class="org">TT Australia</span></div>
+            <div class="deploy"><span class="dot"></span><a href="https://ttnz.stupaevents.com" target="_blank" rel="noopener">ttnz.stupaevents.com</a><span class="org">TT New Zealand</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="mods">
+        <figure class="mod">
+          <figcaption class="label">draw.gen({ type: "knockout", size: 8 })</figcaption>
+          <svg class="viz" data-viz="draw" data-flavor="dev" viewBox="0 0 420 300" role="img" aria-label="Sample 8-player knockout draw with the winner's path highlighted"></svg>
+          <p class="mod-cap">Seeds placed, rounds linked, winner path resolved through to the final.</p>
+        </figure>
+        <figure class="mod">
+          <figcaption class="label">scheduler.plan({ tables: 4, slot: "30m" })</figcaption>
+          <svg class="viz" data-viz="schedule" data-flavor="dev" viewBox="0 0 420 300" role="img" aria-label="Sample match schedule across 4 tables and 30-minute slots"></svg>
+          <p class="mod-cap">Matches assigned to tables and time slots, with done, live and queued states.</p>
+        </figure>
+        <figure class="mod">
+          <figcaption class="label">scoresheet.print({ match: "M11" })</figcaption>
+          <svg class="viz" data-viz="sheet" data-flavor="dev" viewBox="0 0 420 300" role="img" aria-label="Sample printed match scoresheet with game scores"></svg>
+          <p class="mod-cap">One print-ready sheet per match, prefilled with event, table and players.</p>
+        </figure>
+      </div>
+      <p class="mod-note">// illustrations use sample data</p>
+      <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap"><span class="chip">Angular</span><span class="chip">TypeScript</span><span class="chip">Node.js libraries</span></div>
+    </div>
+  </section>
+
+  <section id="pvl">
+    <div class="wrap">
+      <div class="sec-head"><span class="file">projects/pvl-match-center/README.md</span><h2>PVL Match Center</h2></div>
+      <div class="pvl-dev">
+        <div class="pvl-dev-text">
+          <p style="margin:0;max-width:56ch">Match center for the <strong>Prime Volleyball League</strong>: league leaders, player and team stats, standings, fixtures and full match results, filterable by season, stage and team.</p>
+          <div class="code nw" style="margin-top:20px"><pre><span class="ln"><span class="c-com">// match-center modules</span></span><span class="ln"><span class="c-key">export const</span> matchCenter = {</span><span class="ln">  stats: [<span class="c-str">"player"</span>, <span class="c-str">"team"</span>],</span><span class="ln">  leaders: [<span class="c-str">"scorer"</span>, <span class="c-str">"attacker"</span>,</span><span class="ln">    <span class="c-str">"blocker"</span>, <span class="c-str">"server"</span>, <span class="c-str">"setter"</span>],</span><span class="ln">  fixtures: [<span class="c-str">"live"</span>, <span class="c-str">"upcoming"</span>,</span><span class="ln">    <span class="c-str">"completed"</span>],</span><span class="ln">  standings: <span class="c-key">true</span>,</span><span class="ln">  matchResult: [<span class="c-str">"sets"</span>, <span class="c-str">"setScores"</span>,</span><span class="ln">    <span class="c-str">"teamComparison"</span>],</span><span class="ln">  filters: [<span class="c-str">"season"</span>, <span class="c-str">"stage"</span>, <span class="c-str">"team"</span>],</span><span class="ln">};</span></pre></div>
+          <div class="deploys" style="margin-top:20px"><div class="deploy"><span class="dot"></span><a href="https://pvl.stupaevents.com/match-center/statistics" target="_blank" rel="noopener">pvl.stupaevents.com/match-center</a><span class="org">PVL · India</span></div></div>
+        </div>
+        <div class="browser" id="pvlBrowser">
+          <div class="br-top">
+            <span class="br-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="br-url" id="pvlUrl">pvl.stupaevents.com/match-center/statistics</span>
+          </div>
+          <div class="br-tabs" role="tablist" aria-label="PVL match center pages">
+            <button type="button" role="tab" id="pt-0" aria-selected="true" data-i="0">statistics</button>
+            <button type="button" role="tab" id="pt-1" aria-selected="false" data-i="1">leaderboard</button>
+            <button type="button" role="tab" id="pt-2" aria-selected="false" data-i="2">fixtures</button>
+            <button type="button" role="tab" id="pt-3" aria-selected="false" data-i="3">match-result</button>
+          </div>
+          <button type="button" class="br-shot zoomable" id="pvlShotBtn" aria-label="Enlarge screenshot"><img id="pvlShot" src="pvl/statistics.jpg" alt="PVL match center statistics page showing best scorer, attacker and blocker leaders" width="1897" height="911"></button>
+          <p class="br-cap" id="pvlCap">// player stats overview: season leaders by skill, with team filter</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="athlete" class="athlete">
+    <div class="wrap">
+      <div class="sec-head"><span class="file">athlete.mode = true</span><h2>Table Tennis</h2></div>
+      <div class="ath-intro">
+        <div>
+          <p>I have played competitive table tennis since 2019. I represent <strong>Haryana</strong> in national tournaments and play out of <strong>Fatehabad</strong> district on the Haryana Table Tennis Association circuit.</p>
+          <p>Every season I play the state ranking championships and the Haryana State &amp; Inter-District Championships, and I have been ranked inside the state's top 12 men every year since 2023. At nationals I've played against some of the country's top-ranked players.</p>
+          <p class="c-com mono" style="font-size:13px">// The same sport I build software for.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="n">#6</div><div class="t">Best HTTA men's rank (2024)</div></div>
+          <div class="stat"><div class="n">#6</div><div class="t">HTTA junior boys U-19 (2023)</div></div>
+          <div class="stat"><div class="n">150</div><div class="t">Ranking points, 2024 season</div></div>
+          <div class="stat"><div class="n">2019</div><div class="t">Playing competitively since</div></div>
+        </div>
+      </div>
+
+      <div class="ath-grid">
+        <div class="panel">
+          <h3>State ranking by season</h3>
+          <p class="sub">HTTA Men's Singles final position · lower is better</p>
+          <svg id="rankChart" viewBox="0 0 520 260" role="img" aria-label="Line chart of Haryana men's singles ranking: 11th in 2023, 6th in 2024, 12th in 2025, 10th in 2026 after first ranking event"></svg>
+        </div>
+        <div class="panel">
+          <h3>2024 season · points log</h3>
+          <p class="sub">Men's Singles · finished #6 with 150 pts</p>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Event</th><th class="r">Pts</th></tr></thead>
+              <tbody id="pts24"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:24px">
+        <h3>Ranking history</h3>
+        <p class="sub">Haryana Table Tennis Association official rankings</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Season</th><th>Category</th><th class="r">Points</th><th class="r">Position</th></tr></thead>
+            <tbody>
+              <tr><td>2026*</td><td>Men's Singles</td><td class="r">30</td><td class="r">10</td></tr>
+              <tr><td>2025</td><td>Men's Singles</td><td class="r">100</td><td class="r">12</td></tr>
+              <tr><td>2024</td><td>Men's Singles</td><td class="r">150</td><td class="r"><span class="best">6</span></td></tr>
+              <tr><td>2023</td><td>Men's Singles</td><td class="r">45</td><td class="r">11</td></tr>
+              <tr><td>2023</td><td>Junior Boys U-19</td><td class="r">75</td><td class="r"><span class="best">6</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="src">*2026 standing after the 1st ranking event. Source: HTTA ranking lists <a href="https://htta.in/assets/pdf/ranking2024/MS_5.pdf" target="_blank" rel="noopener">2024</a> · <a href="https://htta.in/assets/pdf/ranking2025/MSRanking2025-5.pdf" target="_blank" rel="noopener">2025</a> · <a href="https://htta.in/assets/pdf/ranking2023/MS.pdf" target="_blank" rel="noopener">2023</a> · <a href="https://htta.in/assets/pdf/ranking2023/JBS_U19.pdf" target="_blank" rel="noopener">2023 U-19</a> · <a href="https://htta.in/assets/pdf/ranking2026/RANKINGMS2026.pdf" target="_blank" rel="noopener">2026</a></p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="sec-head"><span class="file only-dev">education.md</span><h2>Education</h2></div>
+      <div class="degree">
+        <div class="cap"><svg><use href="#i-cap"/></svg></div>
+        <div class="deg-body">
+          <span class="deg-kicker"><span class="only-human">Bachelor's degree · Graduate</span><span class="only-dev mono">degree: "BCA" · status: graduated</span></span>
+          <h3>Bachelor of Computer Applications</h3>
+          <div class="deg-meta">
+            <span><svg><use href="#i-cap"/></svg>S.D. College</span>
+            <span><svg><use href="#i-pin"/></svg>Ambala Cantt, Haryana</span>
+          </div>
+          <div class="deg-tags"><span class="tag">BCA</span><span class="tag">Computer Applications</span><span class="tag">Undergraduate</span></div>
+        </div>
+        <svg class="diploma" viewBox="0 0 220 140" aria-hidden="true">
+          <rect class="paper" x="28" y="34" width="164" height="64" rx="6"/>
+          <ellipse class="roll" cx="28" cy="66" rx="12" ry="32"/>
+          <ellipse class="roll" cx="192" cy="66" rx="12" ry="32"/>
+          <ellipse class="roll-in" cx="192" cy="66" rx="5" ry="14"/>
+          <path class="ink" d="M50 52h46M50 64h70M50 76h56"/>
+          <rect class="ribbon" x="132" y="34" width="14" height="64"/>
+          <circle class="seal" cx="139" cy="98" r="13"/>
+          <path class="ribbon-tail" d="M131 108l-6 24 10-7 4 9 2-26zM147 108l6 24-10-7-4 9-2-26z"/>
+          <circle class="seal-in" cx="139" cy="98" r="6"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="border-bottom:0">
+    <div class="wrap">
+      <div class="sec-head"><span class="file only-dev">$ ./contact.sh</span><h2><span class="only-dev">Let's build something</span><span class="only-human">Let's talk</span></h2></div>
+      <p style="margin:0 0 20px;color:var(--muted);max-width:60ch">Open to frontend roles and sports-tech projects. Email or call me directly.</p>
+      <div class="contact-grid">
+        <div class="ccard">
+          <span class="label">email</span>
+          <span class="val" id="emailVal">divyanshu.lingwal02@gmail.com</span>
+          <div class="row"><button class="btn primary" type="button" id="copyEmail" data-copy="divyanshu.lingwal02@gmail.com">Copy email</button><a class="btn" href="mailto:divyanshu.lingwal02@gmail.com">Open mail app</a></div>
+          <div class="toast" id="t-copyEmail" aria-live="polite"></div>
+        </div>
+        <div class="ccard">
+          <span class="label">phone</span>
+          <span class="val" id="phoneVal">+91 82875 34867</span>
+          <div class="row"><button class="btn primary" type="button" id="copyPhone" data-copy="+918287534867">Copy number</button><a class="btn" href="tel:+918287534867">Call</a></div>
+          <div class="toast" id="t-copyPhone" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span>© 2026 Divyanshu Lingwal</span><span class="only-dev">built with three.js · svg · zero frameworks</span><span class="only-human">Designed and built by me</span></div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* developer view is always the dark palette, whatever mode the page loads in */
+const DEV={'--bg':'#0b1020','--panel':'#111830','--line':'#1f2a4a','--fg':'#dfe6f7','--muted':'#8693b5','--accent':'#4fc3ff','--ball':'#ff8a2a','--ok':'#5ee6a8'};
+const tok = n => DEV[n];
+const root=document.documentElement;
+const isHuman=()=>root.dataset.mode==='human';
+
+/* mode toggle */
+const modeBtns=[...document.querySelectorAll('.mode-toggle button')];
+function syncBtns(){modeBtns.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.set===root.dataset.mode)));}
+syncBtns();
+modeBtns.forEach(b=>b.addEventListener('click',()=>{
+  if(root.dataset.mode===b.dataset.set)return;
+  root.dataset.mode=b.dataset.set;syncBtns();
+  try{localStorage.setItem('pf-mode',b.dataset.set);}catch(e){}
+  window.scrollTo({top:0,behavior:'instant'});
+  window.dispatchEvent(new Event('modechange'));
+}));
+
+/* typed roles */
+const roles=["Frontend Developer","Angular · TypeScript engineer","Sports-tech builder","State-level TT athlete"];
+const typed=document.getElementById('typed');
+if(!reduce){
+  let r=0,i=roles[0].length,del=true,wait=40;
+  (function tick(){
+    if(wait>0){wait--;return setTimeout(tick,50);}
+    const w=roles[r];
+    if(del){i--; if(i<=0){del=false;r=(r+1)%roles.length;}}
+    else{i++; if(i>=roles[r].length){del=true;wait=40;}}
+    typed.textContent=roles[r].slice(0,Math.max(0,i));
+    setTimeout(tick,del?28:55);
+  })();
+}
+
+/* copy buttons */
+document.querySelectorAll('[data-copy]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const t=document.getElementById('t-'+b.id);
+    const ok=()=>{t.textContent='✓ copied to clipboard';setTimeout(()=>t.textContent='',2200);};
+    const fallback=()=>{const el=b.closest('.ccard').querySelector('.val');const s=getSelection();const rg=document.createRange();rg.selectNodeContents(el);s.removeAllRanges();s.addRange(rg);t.textContent='Selected. Press Ctrl/Cmd + C to copy.';};
+    try{navigator.clipboard.writeText(b.dataset.copy).then(ok,fallback);}catch(e){fallback();}
+  });
+});
+
+/* active tab */
+const links=[...document.querySelectorAll('.tabs a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id));}}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
+
+/* PVL browser tabs + lightbox */
+(function(){
+  const pages=[
+    ['statistics.jpg','pvl.stupaevents.com/match-center/statistics','// player stats overview: season leaders by skill, with team filter','PVL match center statistics page showing best scorer, attacker and blocker leaders'],
+    ['leaderboard.jpg','pvl.stupaevents.com/match-center/statistics · best scorer','// full leaderboard: quick filters for scorer, attacker, blocker, server, setter','Best scorer leaderboard with points and matches played'],
+    ['fixtures.jpg','pvl.stupaevents.com/match-center · fixtures & results','// fixtures: live / upcoming / completed, filters for season, stage, team','Fixtures and results list with set-by-set scores'],
+    ['match-result.jpg','pvl.stupaevents.com/match-center/match-result/3/2/1402/0','// match result: sets won, set scores, team comparison bars','Match result page with final score and team comparison']
+  ];
+  const tabs=[...document.querySelectorAll('#pvlBrowser [role="tab"]')],img=document.getElementById('pvlShot'),url=document.getElementById('pvlUrl'),cap=document.getElementById('pvlCap');
+  function show(i){tabs.forEach((t,j)=>t.setAttribute('aria-selected',String(i===j)));const p=pages[i];img.src='pvl/'+p[0];img.alt=p[3];url.textContent=p[1];cap.textContent=p[2];}
+  tabs.forEach(t=>t.addEventListener('click',()=>show(+t.dataset.i)));
+  tabs.forEach((t,i)=>t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=(i+(e.key==='ArrowRight'?1:3))%4;show(n);tabs[n].focus();}}));
+  document.querySelectorAll('.zoomable').forEach(b=>b.addEventListener('click',()=>{
+    const im=b.querySelector('img');const lb=document.createElement('div');lb.className='lightbox';lb.setAttribute('role','dialog');lb.setAttribute('aria-label',im.alt);
+    lb.innerHTML='<button type="button" class="lb-close">Close</button>';const big=document.createElement('img');big.src=im.src;big.alt=im.alt;lb.appendChild(big);
+    const close=()=>{lb.remove();removeEventListener('keydown',esc);b.focus();};const esc=e=>{if(e.key==='Escape')close();};
+    lb.addEventListener('click',close);addEventListener('keydown',esc);document.body.appendChild(lb);lb.querySelector('.lb-close').focus();
+  }));
+})();
+
+/* feature visuals: draw, schedule, scoresheet */
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  let uid=0;
+  function render(svg){
+    const kind=svg.dataset.viz,human=svg.dataset.flavor==='human';
+    const mk=(t,a,txt,parent)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;(parent||svg).appendChild(e);return e;};
+
+    if(kind==='draw'){
+      const n=human?['Player 1','Player 8','Player 5','Player 4','Player 3','Player 6','Player 7','Player 2']:['Seed 1','Q-08','Seed 5','Q-04','Seed 3','Q-06','Seed 7','Seed 2'];
+      const rounds=[n,[n[0],n[2],n[4],n[7]],[n[0],n[7]],[n[0]]];
+      const champ=n[0],cols=[6,114,222,330],w=84,h=24;
+      let ys=n.map((_,i)=>16+i*32);
+      const labels=human?['Quarter-finals','Semi-finals','Final','Winner']:['QF','SF','F','WIN'];
+      rounds.forEach((r,ri)=>{
+        const x=cols[ri];
+        if(ri>0){
+          const prev=ys;ys=[];
+          for(let i=0;i<prev.length;i+=2){
+            const a=prev[i]+h/2,b=prev[i+1]+h/2,mid=(a+b)/2,x1=cols[ri-1]+w,xm=x1+(x-x1)/2;
+            const pairWin=rounds[ri-1][i]===champ||rounds[ri-1][i+1]===champ;
+            mk('path',{d:`M${x1} ${a}H${xm}V${b}H${x1}M${xm} ${mid}H${x}`,class:'ln'+(pairWin?' win':'')});
+            ys.push(mid-h/2);
+          }
+        }
+        r.forEach((name,i)=>{
+          const last=ri===3,win=name===champ;
+          mk('rect',{x,y:ys[i],width:w,height:h,rx:5,class:'bx'+(last?' champ':win?' win':'')});
+          mk('text',{x:x+9,y:ys[i]+16,'font-size':11,'font-weight':win?700:400,class:last?'t-white':''},name);
+        });
+        mk('text',{x:x+w/2,y:290,'text-anchor':'middle','font-size':10.5,class:'t-muted'},labels[ri]);
+      });
+    }
+
+    if(kind==='schedule'){
+      const L=human?64:44,T=34,cols=6,cw=(420-L-6)/cols,rh=54;
+      const times=['10:00','10:30','11:00','11:30','12:00','12:30'];
+      const plan=[
+        [[0,1,'done'],[1,5,'done'],[2,9,'live'],[3,13],[5,21]],
+        [[0,2,'done'],[1,6,'done'],[2,10,'live'],[4,17],[5,22]],
+        [[0,3,'done'],[2,11,'live'],[3,14],[4,18]],
+        [[0,4,'done'],[1,7,'done'],[3,15],[4,19],[5,23]]
+      ];
+      times.forEach((t,i)=>mk('text',{x:L+i*cw+4,y:22,'font-size':10.5,class:'t-muted'},t));
+      for(let i=0;i<=cols;i++)mk('line',{x1:L+i*cw,x2:L+i*cw,y1:T,y2:T+4*rh,class:'grid'});
+      for(let r=0;r<=4;r++)mk('line',{x1:L,x2:420-6,y1:T+r*rh,y2:T+r*rh,class:'grid'});
+      const nx0=L+2.5*cw;mk('line',{x1:nx0,x2:nx0,y1:T-4,y2:T+4*rh+6,class:'now'});
+      plan.forEach((row,r)=>{
+        mk('text',{x:4,y:T+r*rh+rh/2+4,'font-size':human?12:11,'font-weight':600},human?'Table '+(r+1):'T'+(r+1));
+        row.forEach(([s,id,st='up'])=>{
+          const x=L+s*cw+3,y=T+r*rh+7;
+          mk('rect',{x,y,width:cw-6,height:rh-14,rx:6,class:'slot-'+st});
+          const lbl=human?'Match '+id:'M'+String(id).padStart(2,'0');
+          mk('text',{x:x+(cw-6)/2,y:y+(rh-14)/2+4,'text-anchor':'middle','font-size':human?9.5:10.5,'font-weight':600,class:st==='live'?'t-white':st==='done'?'t-muted':''},lbl);
+        });
+      });
+      const nx=nx0;
+      mk('text',{x:nx,y:T+4*rh+18,'text-anchor':'middle','font-size':10,'font-weight':700,class:'t-ball'},human?'Now, 11:15':'now()');
+      const leg=human?[['done','Finished'],['live','Playing now'],['up','Up next']]:[['done','done'],['live','live'],['up','queued']];
+      let lx=L;leg.forEach(([c,t])=>{mk('rect',{x:lx,y:280,width:12,height:12,rx:3,class:'slot-'+c});mk('text',{x:lx+17,y:290,'font-size':10.5,class:'t-muted'},t);lx+=human?96:78;});
+    }
+
+    if(kind==='sheet'){
+      const id='clip'+(++uid);
+      const defs=mk('defs',{});const cp=mk('clipPath',{id},null,defs);mk('rect',{x:0,y:30,width:420,height:270},null,cp);
+      mk('rect',{x:10,y:4,width:400,height:34,rx:9,class:'printer'});
+      mk('circle',{cx:388,cy:16,r:3.5,class:'led'});
+      const clip=mk('g',{'clip-path':`url(#${id})`});
+      const g=mk('g',{class:'sheet'},null,clip);
+      mk('rect',{x:46,y:30,width:328,height:266,rx:2,class:'paper'},null,g);
+      mk('rect',{x:46,y:30,width:328,height:32,class:'band'},null,g);
+      mk('text',{x:60,y:51,'font-size':12.5,'font-weight':700,'letter-spacing':1.5,class:'t-band'},'SCORESHEET',g);
+      mk('text',{x:360,y:51,'text-anchor':'end','font-size':11,class:'t-band'},human?'Match 11':'#M11',g);
+      mk('text',{x:60,y:82,'font-size':10.5,class:'t-ink-m'},"Men's Singles · Quarter-final · Table 3 · 11:00",g);
+      const gx=i=>200+i*27;
+      mk('text',{x:60,y:106,'font-size':9.5,class:'t-ink-m'},'PLAYER',g);
+      for(let i=0;i<5;i++)mk('text',{x:gx(i),y:106,'text-anchor':'middle','font-size':9.5,class:'t-ink-m'},'G'+(i+1),g);
+      mk('text',{x:350,y:106,'text-anchor':'middle','font-size':9.5,class:'t-ink-m'},'GAMES',g);
+      [114,144,174].forEach(y=>mk('line',{x1:56,x2:364,y1:y,y2:y,class:'rule'},null,g));
+      mk('rect',{x:56,y:114,width:308,height:30,class:'hl'},null,g);
+      const rows=[['Player A',[11,9,11,11,'–'],3],['Player B',[7,11,8,5,'–'],1]];
+      rows.forEach(([nm,sc,tot],r)=>{
+        const y=134+r*30;
+        mk('text',{x:60,y,'font-size':12,'font-weight':r===0?700:500,class:'t-ink'},nm,g);
+        sc.forEach((v,i)=>mk('text',{x:gx(i),y,'text-anchor':'middle','font-size':12,class:'t-ink','font-weight':(r===0?sc[i]>rows[1][1][i]:sc[i]>rows[0][1][i])?700:400},String(v),g));
+        mk('text',{x:350,y,'text-anchor':'middle','font-size':15,'font-weight':800,class:r===0?'t-ball':'t-ink'},String(tot),g);
+      });
+      mk('text',{x:60,y:200,'font-size':10.5,class:'t-ink-m'},human?'Winner: Player A, 3 games to 1':'result: { winner: "A", games: [3, 1] }',g);
+      mk('line',{x1:60,x2:190,y1:248,y2:248,class:'sig'},null,g);
+      mk('line',{x1:230,x2:360,y1:248,y2:248,class:'sig'},null,g);
+      mk('text',{x:60,y:264,'font-size':10,class:'t-ink-m'},'Umpire',g);
+      mk('text',{x:230,y:264,'font-size':10,class:'t-ink-m'},'Referee',g);
+      mk('text',{x:60,y:286,'font-size':9,class:'t-ink-m'},human?'Printed from the tournament platform':'generated by ems · print()',g);
+      if(!reduce&&'IntersectionObserver' in window){
+        const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&svg.getBoundingClientRect().width>0){g.classList.add('go');ob.disconnect();}}),{threshold:.5});
+        ob.observe(svg);
+      }
+    }
+  }
+  document.querySelectorAll('svg.viz').forEach(render);
+})();
+/* points table 2024 */
+(function(){
+  const rows=[["1st State Ranking · Gurugram",30],["2nd State Ranking · Karnal",15],["3rd State Ranking · Sonepat",30],["4th State Ranking",15],["58th State & Inter-District Ch.",60]];
+  const max=60,tb=document.getElementById('pts24');
+  rows.forEach(([n,p])=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${n}</td><td class="r"><span class="bar-cell"><span class="b" style="width:${Math.round(p/max*70)}px"></span>${p}</span></td>`;tb.appendChild(tr);});
+  const tr=document.createElement('tr');tr.innerHTML='<td style="color:var(--fg);font-weight:700">Total</td><td class="r"><span class="best">150</span></td>';tb.appendChild(tr);
+})();
+
+/* ranking chart */
+(function(){
+  const svg=document.getElementById('rankChart'),NS='http://www.w3.org/2000/svg';
+  const data=[["2023",11],["2024",6],["2025",12],["2026*",10]];
+  const W=520,H=260,L=48,R=24,T=20,B=40,ymin=1,ymax=14;
+  const x=i=>L+i*(W-L-R)/(data.length-1);
+  const y=v=>T+(v-ymin)/(ymax-ymin)*(H-T-B);
+  const mk=(t,a,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;};
+  const line=tok('--line'),mut=tok('--muted'),acc=tok('--accent'),ball=tok('--ball'),fg=tok('--fg'),bg=tok('--panel');
+  [1,4,8,12].forEach(v=>{mk('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:line});mk('text',{x:L-10,y:y(v)+4,'text-anchor':'end',fill:mut,'font-size':11,'font-family':'JetBrains Mono, monospace'},'#'+v);});
+  mk('rect',{x:L,y:y(1),width:W-L-R,height:y(10.5)-y(1),fill:acc,'fill-opacity':.06});
+  mk('text',{x:W-R-6,y:y(1)+14,'text-anchor':'end',fill:mut,'font-size':10,'font-family':'JetBrains Mono, monospace'},'top 10');
+  const d=data.map((p,i)=>(i?'L':'M')+x(i)+' '+y(p[1])).join('');
+  mk('path',{d:d+`L${x(data.length-1)} ${H-B}L${x(0)} ${H-B}Z`,fill:acc,'fill-opacity':.08});
+  mk('path',{d,fill:'none',stroke:acc,'stroke-width':2.5,'stroke-linejoin':'round'});
+  data.forEach((p,i)=>{
+    const best=p[1]===6;
+    mk('circle',{cx:x(i),cy:y(p[1]),r:best?7:5,fill:best?ball:bg,stroke:best?ball:acc,'stroke-width':2});
+    mk('text',{x:x(i),y:y(p[1])-13,'text-anchor':'middle',fill:best?ball:fg,'font-size':12,'font-weight':700,'font-family':'JetBrains Mono, monospace'},'#'+p[1]);
+    mk('text',{x:x(i),y:H-B+22,'text-anchor':'middle',fill:mut,'font-size':11,'font-family':'JetBrains Mono, monospace'},p[0]);
+  });
+})();
+
+/* three.js rally */
+(function(){
+  const canvas=document.getElementById('rally');
+  if(!window.THREE){canvas.parentElement.style.display='none';return;}
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(40,1,0.1,100);
+  const acc=new THREE.Color(tok('--accent')),ballC=new THREE.Color(tok('--ball')),lineC=new THREE.Color(tok('--line'));
+
+  // floor grid
+  const grid=new THREE.GridHelper(30,30,lineC,lineC);grid.position.y=-0.76;scene.add(grid);
+
+  // table: 2.74 x 1.525 m, top at y=0
+  const T=new THREE.Group();scene.add(T);
+  const topGeo=new THREE.BoxGeometry(2.74,0.03,1.525);
+  const top=new THREE.Mesh(topGeo,new THREE.MeshBasicMaterial({color:acc,transparent:true,opacity:0.10}));top.position.y=-0.015;T.add(top);
+  T.add(new THREE.LineSegments(new THREE.EdgesGeometry(topGeo),new THREE.LineBasicMaterial({color:acc})));
+  const lm=new THREE.LineBasicMaterial({color:acc,transparent:true,opacity:0.6});
+  const seg=(a,b,m=lm)=>{const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...a),new THREE.Vector3(...b)]);T.add(new THREE.Line(g,m));};
+  seg([-1.37,0.002,0],[1.37,0.002,0]); // centre line
+  // legs
+  [[-1.1,-0.6],[1.1,-0.6],[-1.1,0.6],[1.1,0.6]].forEach(([x,z])=>seg([x,-0.03,z],[x,-0.76,z]));
+  // net
+  const netGeo=new THREE.PlaneGeometry(1.83,0.1525,18,3);
+  const net=new THREE.LineSegments(new THREE.WireframeGeometry(netGeo),new THREE.LineBasicMaterial({color:0xdfe6f7,transparent:true,opacity:0.35}));
+  net.rotation.y=Math.PI/2;net.position.y=0.076;T.add(net);
+
+  // ball + trail
+  const ball=new THREE.Mesh(new THREE.SphereGeometry(0.035,20,16),new THREE.MeshBasicMaterial({color:ballC}));scene.add(ball);
+  const glow=new THREE.Mesh(new THREE.SphereGeometry(0.07,16,12),new THREE.MeshBasicMaterial({color:ballC,transparent:true,opacity:0.25}));ball.add(glow);
+  const N=40,trailPos=new Float32Array(N*3);
+  const trailGeo=new THREE.BufferGeometry();trailGeo.setAttribute('position',new THREE.BufferAttribute(trailPos,3));
+  const trail=new THREE.Line(trailGeo,new THREE.LineBasicMaterial({color:ballC,transparent:true,opacity:0.5}));scene.add(trail);
+
+  // paddles (simple discs) at ends
+  const padM=new THREE.MeshBasicMaterial({color:0xdfe6f7,transparent:true,opacity:0.18,side:THREE.DoubleSide});
+  const padE=new THREE.LineBasicMaterial({color:0xdfe6f7,transparent:true,opacity:0.6});
+  function paddle(){const g=new THREE.Group();const c=new THREE.CircleGeometry(0.085,24);g.add(new THREE.Mesh(c,padM));g.add(new THREE.LineSegments(new THREE.EdgesGeometry(c),padE));g.rotation.y=Math.PI/2;scene.add(g);return g;}
+  const pA=paddle(),pB=paddle();
+
+  // shot generation: hit from x0 at height h, bounce on opponent half, reach other end
+  let shot,hits=0;const hitsEl=document.getElementById('hits');
+  function newShot(fromX){
+    const dir=-Math.sign(fromX);
+    const z0=shot?shot.z1:(Math.random()-0.5)*0.8, z1=(Math.random()-0.5)*1.1;
+    const bx=dir*(0.4+Math.random()*0.8), bz=z0+(z1-z0)*0.62;
+    shot={x0:fromX,z0,x1:-fromX,z1,bx,bz,h0:0.18+Math.random()*0.12,apex:0.22+Math.random()*0.12,t:0,dur:0.9+Math.random()*0.35};
+    hits++;hitsEl.textContent=hits;
+  }
+  newShot(-1.6);
+  function ballAt(s,t){
+    const k=0.6; // fraction of time until bounce
+    if(t<k){const u=t/k;const x=s.x0+(s.bx-s.x0)*u,z=s.z0+(s.bz-s.z0)*u;
+      const y=(1-u)*s.h0+4*s.apex*u*(1-u)*0.9+0.035; return [x,y,z];}
+    const u=(t-k)/(1-k);const x=s.bx+(s.x1-s.bx)*u,z=s.bz+(s.z1-s.bz)*u;
+    const y=0.035+u*0.2+4*0.28*u*(1-u);return [x,y,z];
+  }
+  function size(){const r=canvas.getBoundingClientRect();renderer.setSize(r.width,r.height,false);cam.aspect=r.width/Math.max(1,r.height);cam.updateProjectionMatrix();}
+  size();addEventListener('resize',size);addEventListener('modechange',()=>{size();if(reduce)frame(performance.now());});
+
+  let mx=0,my=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-0.5;my=e.clientY/innerHeight-0.5;});
+  let last=performance.now(),ang=0.6,fpsAcc=0,fpsN=0;const fpsEl=document.getElementById('fps');
+  function frame(now){
+    const dt=Math.min(0.05,(now-last)/1000);last=now;
+    if(isHuman()){if(!reduce)requestAnimationFrame(frame);return;}
+    shot.t+=dt/shot.dur;
+    if(shot.t>=1){const end=shot.x1;newShot(end);}
+    const p=ballAt(shot,shot.t);ball.position.set(...p);
+    trailPos.copyWithin(3,0,(N-1)*3);trailPos[0]=p[0];trailPos[1]=p[1];trailPos[2]=p[2];trailGeo.attributes.position.needsUpdate=true;
+    const hitter=shot.x0<0?pA:pB,receiver=shot.x0<0?pB:pA;
+    receiver.position.lerp(new THREE.Vector3(shot.x1+Math.sign(shot.x1)*0.08,0.3,shot.z1),0.08);
+    hitter.position.lerp(new THREE.Vector3(shot.x0+Math.sign(shot.x0)*0.25,0.35,shot.z0),0.05);
+    ang+=dt*0.12;
+    const R=4.1;cam.position.set(Math.cos(ang)*R*0.55+mx*0.6,1.75-my*0.5,Math.sin(ang)*R*0.35+2.9);
+    cam.lookAt(0,0.05,0);
+    renderer.render(scene,cam);
+    fpsAcc+=dt;fpsN++;if(fpsAcc>0.5){fpsEl.textContent=Math.round(fpsN/fpsAcc);fpsAcc=0;fpsN=0;}
+    if(!reduce)requestAnimationFrame(frame);
+  }
+  // seed trail
+  ball.position.set(...ballAt(shot,0));
+  for(let i=0;i<N;i++){trailPos.set(ball.position.toArray(),i*3);}
+  if(reduce){shot.t=0.45;frame(performance.now());}else requestAnimationFrame(frame);
+})();
+
+/* typing keyboard (Everyone view) */
+(function(){
+  const cv=document.getElementById('keys'),ctx=cv.getContext('2d'),scr=document.getElementById('scrText');
+  const rows=[
+    [['`'],['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['0'],['-'],['='],['Backspace','\b',2]],
+    [['Tab','\t',1.5],['Q'],['W'],['E'],['R'],['T'],['Y'],['U'],['I'],['O'],['P'],['['],[']'],['\\','\\',1.5]],
+    [['Caps','caps',1.75],['A'],['S'],['D'],['F'],['G'],['H'],['J'],['K'],['L'],[';'],["'"],['Enter','\n',2.25]],
+    [['Shift','shiftL',2.25],['Z'],['X'],['C'],['V'],['B'],['N'],['M'],[','],['.'],['/'],['Shift','shiftR',2.75]],
+    [['Ctrl','ctrlL',1.5],['Alt','altL',1.5],['','space',9],['Alt','altR',1.5],['Ctrl','ctrlR',1.5]]
+  ];
+  const keys=[];rows.forEach((r,ri)=>{let x=0;r.forEach(([l,id,w=1])=>{keys.push({l,id:id||l.toLowerCase(),w,x,ri,mod:!!id&&id!=='\\'});x+=w;});});
+  const pressed={};
+  const idFor=c=>c===' '?'space':c.toLowerCase();
+  function press(c){
+    const now=performance.now();
+    if(c==='\b'){pressed['\b']=now;return;}
+    if(/[A-Z]/.test(c))pressed.shiftL=now;
+    pressed[idFor(c)]=now;
+  }
+  let C={},W=0,H=0,dpr=1;
+  function readTokens(){const s=getComputedStyle(root);['--deck','--keyside','--panel','--fg','--muted','--ball','--accent','--on-accent'].forEach(t=>C[t]=s.getPropertyValue(t).trim());}
+  function size(){
+    W=cv.clientWidth;if(!W)return;H=W*56/156;dpr=Math.min(devicePixelRatio||1,2);
+    cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);readTokens();draw(performance.now());
+  }
+  function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+  function draw(now){
+    if(!W)return;
+    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const u=W/15.6,p=u*0.3,g=u*0.13,depth=u*0.1,rad=u*0.14;
+    keys.forEach(k=>{
+      const x=p+k.x*u+g/2,y=p+k.ri*u+g/2,w=k.w*u-g,h=u-g;
+      const t=pressed[k.id];let d=0;
+      if(t!=null){const a=now-t;d=a<90?1:Math.max(0,1-(a-90)/220);}
+      ctx.fillStyle=C['--keyside'];rr(x,y+depth,w,h-depth,rad);ctx.fill();
+      const oy=depth*d;
+      ctx.fillStyle=C['--panel'];rr(x,y+oy,w,h-depth,rad);ctx.fill();
+      if(d>0){ctx.globalAlpha=d;ctx.fillStyle=C['--ball'];rr(x,y+oy,w,h-depth,rad);ctx.fill();ctx.globalAlpha=1;}
+      if(k.l){
+        ctx.fillStyle=d>0.4?'#ffffff':(k.mod?C['--muted']:C['--fg']);
+        const fs=k.mod?u*0.2:u*0.3;
+        ctx.font=`600 ${fs}px "IBM Plex Sans", system-ui, sans-serif`;ctx.textBaseline='middle';
+        if(k.mod){ctx.textAlign='left';ctx.fillText(k.l,x+u*0.14,y+oy+(h-depth)/2);}
+        else{ctx.textAlign='center';ctx.fillText(k.l,x+w/2,y+oy+(h-depth)/2);}
+      }
+    });
+  }
+  // demo typing
+  const phrases=['Divyanshu Lingwal','Frontend Developer','I build websites people enjoy','Table tennis, Team Haryana'];
+  let pi=0,idx=phrases[0].length,text=phrases[0],state='hold',nextAt=performance.now()+2600,userUntil=0;
+  function step(now){
+    if(now<userUntil||now<nextAt)return;
+    if(state==='type'){
+      const ph=phrases[pi];
+      if(idx<ph.length){const c=ph[idx++];press(c);text+=c;nextAt=now+(c===' '?140:70+Math.random()*90);}
+      else{state='hold';nextAt=now+(pi===0?2600:1600);}
+    }else if(state==='hold'){state='del';nextAt=now;}
+    else if(state==='del'){
+      if(text.length){text=text.slice(0,-1);press('\b');nextAt=now+32;}
+      else{pi=(pi+1)%phrases.length;idx=0;state='type';nextAt=now+350;}
+    }
+    scr.textContent=text;
+  }
+  function userType(c){
+    const now=performance.now();userUntil=now+2600;state='del';
+    if(c==='\b'){text=text.slice(0,-1);press('\b');}
+    else{if(text.length>34)text='';text+=c;press(c);}
+    scr.textContent=text;
+  }
+  const map={Backspace:'\b',Shift:'shiftL',Enter:'\n',Tab:'\t',CapsLock:'caps',Control:'ctrlL',Alt:'altL'};
+  addEventListener('keydown',e=>{
+    if(!isHuman()||e.metaKey||e.ctrlKey||e.altKey)return;
+    const tg=e.target;if(tg&&(tg.tagName==='INPUT'||tg.tagName==='TEXTAREA'||tg.isContentEditable))return;
+    if(e.key.length===1){if(keys.some(k=>k.id===idFor(e.key))){userType(e.key);if(e.key===' '&&tg===document.body)e.preventDefault();}}
+    else if(e.key==='Backspace')userType('\b');
+    else if(map[e.key])pressed[map[e.key]]=performance.now();
+  });
+  cv.addEventListener('pointerdown',e=>{
+    const r=cv.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top,u=W/15.6,p=u*0.3;
+    const k=keys.find(k=>mx>=p+k.x*u&&mx<=p+(k.x+k.w)*u&&my>=p+k.ri*u&&my<=p+(k.ri+1)*u);
+    if(!k)return;
+    if(k.id==='\b')userType('\b');
+    else if(k.id==='space')userType(' ');
+    else if(k.id.length===1)userType(k.id.match(/[a-z]/)&&!text.length?k.id.toUpperCase():k.id);
+    else pressed[k.id]=performance.now();
+  });
+  addEventListener('resize',size);
+  addEventListener('modechange',()=>{size();});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
+  size();
+  if(reduce){scr.textContent=phrases[0];return;}
+  (function loop(now){if(isHuman()&&W){step(now);draw(now);}else if(isHuman())size();requestAnimationFrame(loop);})(performance.now());
+})();
+})();
+</script>
+
+</body>
+</html>
