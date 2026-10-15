@@ -3,10 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Divyanshu Lingwal: Frontend Developer (Angular, TypeScript) building sports-tech platforms, and state-level table tennis athlete for Haryana.">
-<meta property="og:title" content="Divyanshu Lingwal · Frontend Developer">
-<meta property="og:description" content="Sports-tech web apps used by four table tennis federations. Table tennis athlete for Haryana.">
-<meta property="og:image" content="pvl/statistics.jpg">
+<meta name="description" content="Divyanshu Lingwal: Frontend Developer (Angular, TypeScript) who built the fixture creation and match scheduling modules of a SaaS tournament platform, bringing a former table tennis player's view to sports tech.">
+<meta property="og:title" content="Divyanshu Lingwal · Frontend Developer, Sports Tech">
+<meta property="og:description" content="Fixture creation and match scheduling for Stupa Events' SaaS EMS, used by four table tennis federations. From player to sports-tech developer.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://devine-coded-div.github.io/portfolio/">
+<meta property="og:image" content="https://devine-coded-div.github.io/portfolio/pvl/statistics.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://devine-coded-div.github.io/portfolio/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f4fd1'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23e85d12'/%3E%3C/svg%3E">
 <style>img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Divyanshu Lingwal</title>
@@ -263,6 +267,19 @@ td .best{color:var(--ball);font-weight:700}
 @media (max-width:860px){.pvl-dev,.gal{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.shot img{transition:none}.shot .zoomable:hover img{transform:none}}
 
+/* lessons (Everyone view) */
+.lessons{display:grid;gap:16px}
+.lesson{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.lesson>*{min-width:0}
+.lesson h3{margin:6px 0 4px}
+.lesson p{margin:0;color:var(--muted);font-size:15px}
+.l-tag{font:600 11.5px var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.l-tag.to{color:var(--ball)}
+.l-to{background:var(--bg);border-radius:12px;padding:14px 16px}
+.l-arrow{font:800 28px var(--f-display);color:var(--accent)}
+.athlete-src{font-size:12.5px}
+@media (max-width:760px){.lesson{grid-template-columns:1fr}.l-arrow{transform:rotate(90deg);justify-self:start;line-height:1}}
+
 /* education */
 .degree{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px 32px;position:relative;overflow:hidden}
 .degree::before{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:color-mix(in srgb,var(--accent) 8%,transparent);pointer-events:none}
@@ -453,7 +470,7 @@ document.documentElement.setAttribute('data-mode',m);})();
       <a href="#h-work">My work</a>
       <a href="#h-pvl">Volleyball</a>
       <a href="#h-skills">Skills</a>
-      <a href="#h-tt">Table tennis</a>
+      <a href="#h-tt">Player to dev</a>
       <a href="#contact">Contact</a>
     </nav>
     <nav class="tabs only-dev" aria-label="Sections">
@@ -462,7 +479,7 @@ document.documentElement.setAttribute('data-mode',m);})();
       <a href="#experience">git log</a>
       <a href="#projects">ems-ott/</a>
       <a href="#pvl">pvl/</a>
-      <a href="#athlete">athlete.mode</a>
+      <a href="#athlete">domain.ts</a>
       <a href="#contact">contact.sh</a>
     </nav>
     <div class="mode-toggle" role="group" aria-label="View mode">
@@ -478,11 +495,11 @@ document.documentElement.setAttribute('data-mode',m);})();
     <div class="wrap">
       <div class="hhero-top">
         <div>
-          <p class="kicker">Frontend Developer · Table Tennis Athlete</p>
+          <p class="kicker">Frontend Developer · Sports Tech</p>
           <h1>Hi, I'm<br><span>Divyanshu</span></h1>
         </div>
         <div>
-          <p class="lede">I build websites and web apps that are fast, clear and easy to use. Away from the screen, I play competitive table tennis for Haryana.</p>
+          <p class="lede">I build websites and web apps that are fast, clear and easy to use. Years of competitive table tennis taught me how tournaments really work, and I bring that to the sports software I build.</p>
           <div class="cta">
             <a class="btn primary" href="#h-work">See my work</a>
             <a class="btn" href="#contact">Contact me</a>
@@ -500,15 +517,15 @@ document.documentElement.setAttribute('data-mode',m);})();
   <section id="h-sides">
     <div class="wrap">
       <p class="kicker">About me</p>
-      <h2>Two sides, same focus</h2>
-      <p class="intro">I spend my days building software for table tennis and my evenings playing it. Both need speed, precision and practice.</p>
+      <h2>From player to sports tech</h2>
+      <p class="intro">Before I built tournament software, I played in tournaments. That experience is why I understand the people my software serves: the players, the organisers and the officials.</p>
       <div class="sides" style="margin-top:32px">
         <div class="side">
           <p class="kicker">At the keyboard</p>
           <h3>Web Developer</h3>
           <ul>
             <li>Frontend Developer at Stupa Sports Analytics since July 2024</li>
-            <li>Built a live-streaming and tournament platform now used by four international table tennis federations</li>
+            <li>Built the fixture creation and match scheduling modules of Stupa Events' tournament software, used by four international table tennis federations</li>
             <li>Makes websites load fast and work on phones, tablets and computers</li>
             <li>Reviews teammates' work and mentors newer developers</li>
           </ul>
@@ -516,15 +533,15 @@ document.documentElement.setAttribute('data-mode',m);})();
         </div>
         <div class="side table">
           <span class="pp" aria-hidden="true"></span>
-          <p class="kicker">At the table</p>
-          <h3>Table Tennis Athlete</h3>
+          <p class="kicker">What the game taught me</p>
+          <h3>A player's view</h3>
           <ul>
-            <li>Playing competitive table tennis since 2019</li>
-            <li>Represents Haryana in national tournaments</li>
-            <li>Ranked #6 in Haryana men's singles in 2024</li>
-            <li>In the state's top 12 every season since 2023</li>
+            <li>I competed at state and national level for Haryana, so I know tournaments from the inside</li>
+            <li>I've lived the draws, the waits between matches and the scoresheets</li>
+            <li>The sport taught me discipline, focus under pressure and steady practice</li>
+            <li>I bring that player's view into every feature I build</li>
           </ul>
-          <div class="tagrow"><span class="tag">Team Haryana</span><span class="tag">Fatehabad district</span></div>
+          <div class="tagrow"><span class="tag">Former state-level player</span><span class="tag">Domain knowledge</span></div>
         </div>
       </div>
     </div>
@@ -533,8 +550,8 @@ document.documentElement.setAttribute('data-mode',m);})();
   <section id="h-work">
     <div class="wrap">
       <p class="kicker">My work</p>
-      <h2>The platform behind the matches</h2>
-      <p class="intro">I built the website and streaming platform that table tennis federations use to run their tournaments and show matches to fans. Today it is live in four regions.</p>
+      <h2>The software behind the tournaments</h2>
+      <p class="intro"><strong>Stupa Events' Event Management System (EMS)</strong> is online software that table tennis federations subscribe to for running their tournaments. One platform serves many federations, each with its own events. I built two of its core modules, <strong>fixture creation</strong> and <strong>match scheduling</strong>, plus the streaming platform where fans watch. Today it is live in four regions.</p>
       <div class="regions">
         <div class="region"><span class="where">Europe</span><span class="who">European Table Tennis Union</span><a href="https://ettu.tv" target="_blank" rel="noopener">ettu.tv ↗</a></div>
         <div class="region"><span class="where">Sweden</span><span class="who">Swedish Table Tennis Association</span><a href="https://sbtfeventsott.stupaevents.com" target="_blank" rel="noopener">Visit site ↗</a></div>
@@ -546,17 +563,17 @@ document.documentElement.setAttribute('data-mode',m);})();
         <div class="work">
           <div class="work-viz"><svg class="viz" data-viz="draw" data-flavor="human" viewBox="0 0 420 300" role="img" aria-label="Example tournament bracket: eight players, the winner's path highlighted in orange"></svg></div>
           <div class="work-text">
-            <div class="step"><span class="ic"><svg><use href="#i-bracket"/></svg></span><span class="kicker" style="margin:0">Step 1 · Before the event</span></div>
-            <h3>Creates the draw</h3>
-            <p>Organisers enter the players, and the platform builds the bracket: who plays whom in every round, from the first match to the final. It supports several tournament formats, so nobody has to draw it up by hand.</p>
+            <div class="step"><span class="ic"><svg><use href="#i-bracket"/></svg></span><span class="kicker" style="margin:0">Step 1 · Before the event · Module I built</span></div>
+            <h3>Fixture creation</h3>
+            <p>Organisers enter the players, and the system creates the fixtures: who plays whom in every round, from the first match to the final. It supports several tournament formats, so nobody has to draw it up by hand.</p>
             <ul class="mini"><li>Works for different tournament formats</li><li>Moves winners forward round by round</li></ul>
           </div>
         </div>
         <div class="work">
           <div class="work-viz"><svg class="viz" data-viz="schedule" data-flavor="human" viewBox="0 0 420 300" role="img" aria-label="Example match-day schedule: matches placed on four tables across the morning"></svg></div>
           <div class="work-text">
-            <div class="step"><span class="ic"><svg><use href="#i-cal"/></svg></span><span class="kicker" style="margin:0">Step 2 · On match day</span></div>
-            <h3>Schedules every match</h3>
+            <div class="step"><span class="ic"><svg><use href="#i-cal"/></svg></span><span class="kicker" style="margin:0">Step 2 · On match day · Module I built</span></div>
+            <h3>Match scheduling</h3>
             <p>It plans which match is played on which table and at what time. That way many matches can run across many tables without clashes, and organisers can keep the day on track.</p>
             <ul class="mini"><li>Assigns matches to tables and time slots</li><li>Helps organisers manage changes during the day</li></ul>
           </div>
@@ -565,7 +582,7 @@ document.documentElement.setAttribute('data-mode',m);})();
           <div class="work-viz"><svg class="viz" data-viz="sheet" data-flavor="human" viewBox="0 0 420 300" role="img" aria-label="Example printed scoresheet for a quarter-final match"></svg></div>
           <div class="work-text">
             <div class="step"><span class="ic"><svg><use href="#i-print"/></svg></span><span class="kicker" style="margin:0">Step 3 · At the table</span></div>
-            <h3>Prints scoresheets</h3>
+            <h3>Scoresheet printing</h3>
             <p>For each match, it produces the official scoresheet, ready to print and hand to the umpire, who records the score game by game.</p>
             <ul class="mini"><li>One sheet per match, ready to print</li><li>Event, table and players already filled in</li></ul>
           </div>
@@ -620,23 +637,32 @@ document.documentElement.setAttribute('data-mode',m);})();
 
   <section id="h-tt">
     <div class="wrap">
-      <p class="kicker">Table tennis</p>
-      <h2>On the table</h2>
-      <p class="intro" style="margin-bottom:32px">I have played competitively since 2019. I represent Haryana at national tournaments and have played against some of India's top-ranked players. In the state, I compete in every ranking championship each season.</p>
-      <div class="board">
-        <div><div class="n">#6</div><div class="t">Haryana men's singles ranking, 2024</div></div>
-        <div><div class="n">Top 12</div><div class="t">In the state, every season since 2023</div></div>
-        <div><div class="n">2019</div><div class="t">Started playing competitively</div></div>
-        <div><div class="n">HR</div><div class="t">Represents Haryana nationally</div></div>
+      <p class="kicker">Player to developer</p>
+      <h2>From the table to the code</h2>
+      <p class="intro" style="margin-bottom:32px">Playing competitively taught me what players and organisers need from a tournament. Those lessons shaped the modules I build.</p>
+      <div class="lessons">
+        <div class="lesson">
+          <div class="l-from"><span class="l-tag">On the table</span><h3>Fair draws matter</h3><p>Players care about who they meet and when. A draw has to be fair, clear and follow the rules of the format.</p></div>
+          <div class="l-arrow" aria-hidden="true">→</div>
+          <div class="l-to"><span class="l-tag to">In the product</span><h3>Fixture creation</h3><p>A module that builds correct fixtures for several tournament formats, without manual work.</p></div>
+        </div>
+        <div class="lesson">
+          <div class="l-from"><span class="l-tag">On the table</span><h3>Timing is everything</h3><p>Long, unpredictable waits between matches hurt players and slow the whole event down.</p></div>
+          <div class="l-arrow" aria-hidden="true">→</div>
+          <div class="l-to"><span class="l-tag to">In the product</span><h3>Match scheduling</h3><p>Plans every match across tables and time slots, so the day runs on time and changes are easy to manage.</p></div>
+        </div>
+        <div class="lesson">
+          <div class="l-from"><span class="l-tag">On the table</span><h3>Every point must be recorded right</h3><p>Umpires need clear, correct sheets so results are never in doubt.</p></div>
+          <div class="l-arrow" aria-hidden="true">→</div>
+          <div class="l-to"><span class="l-tag to">In the product</span><h3>Scoresheet printing</h3><p>Print-ready sheets for every match, with event, table and players already filled in.</p></div>
+        </div>
+        <div class="lesson">
+          <div class="l-from"><span class="l-tag">On the table</span><h3>Practice beats talent</h3><p>Steady improvement, a review after every match, and staying calm under pressure.</p></div>
+          <div class="l-arrow" aria-hidden="true">→</div>
+          <div class="l-to"><span class="l-tag to">In the team</span><h3>How I work</h3><p>Small, steady improvements, careful code reviews and calm delivery when a live event is on.</p></div>
+        </div>
       </div>
-      <ol class="journey">
-        <li><div class="y">2019</div><p>Started competing in table tennis</p></li>
-        <li><div class="y">2023</div><p><b>#6</b> in Haryana under-19 boys, <b>#11</b> in men's singles</p></li>
-        <li class="best"><div class="y">2024</div><p><b>#6</b> in Haryana men's singles, my best season so far</p></li>
-        <li><div class="y">2025</div><p><b>#12</b> in Haryana men's singles</p></li>
-        <li><div class="y">2026</div><p><b>#10</b> after the first ranking event of the season</p></li>
-      </ol>
-      <p class="h-src">Rankings from the Haryana Table Tennis Association's official lists.</p>
+      <p class="h-src">Playing record: competed for Haryana at state and national level; best state ranking #6 in men's singles (2024, <a href="https://htta.in/assets/pdf/ranking2024/MS_5.pdf" target="_blank" rel="noopener">Haryana Table Tennis Association</a>).</p>
     </div>
   </section>
 </div>
@@ -648,10 +674,10 @@ document.documentElement.setAttribute('data-mode',m);})();
         <p class="prompt"><span>➜</span> divyanshu@delhi:~$ <span class="c-fn">npm run</span> portfolio</p>
         <h1>Divyanshu<br><span class="last">Lingwal</span></h1>
         <p class="role" aria-live="polite"><span id="typed">Frontend Developer</span><span class="cursor" aria-hidden="true"></span></p>
-        <p class="lede">I build sports-tech web apps in Angular and TypeScript. The tournament platform I built is used by four table tennis federations. Off the keyboard, I play competitive table tennis for Haryana.</p>
+        <p class="lede">I build sports-tech web apps in Angular and TypeScript. The tournament platform I built is used by four table tennis federations. As a former competitive table tennis player, I build tournament software with a player's view.</p>
         <div class="cta">
           <a class="btn primary" href="#projects">./view-projects</a>
-          <a class="btn" href="#athlete">./athlete-mode</a>
+          <a class="btn" href="#athlete">./player-to-dev</a>
           <a class="btn" href="#contact">./contact</a>
         </div>
       </div>
@@ -666,13 +692,13 @@ document.documentElement.setAttribute('data-mode',m);})();
     <div class="wrap">
       <div class="sec-head"><span class="file">src/about.ts</span><h2>About</h2></div>
       <div class="about-grid">
-        <div class="code"><pre><span class="ln"><span class="c-com">// Frontend Developer · 2 years in production</span></span><span class="ln"><span class="c-key">export const</span> developer = {</span><span class="ln">  name: <span class="c-str">"Divyanshu Lingwal"</span>,</span><span class="ln">  location: <span class="c-str">"Delhi, India"</span>,</span><span class="ln">  role: <span class="c-str">"Frontend Developer"</span>,</span><span class="ln">  company: <span class="c-str">"Stupa Sports Analytics"</span>,</span><span class="ln">  experienceYears: <span class="c-num">2</span>,</span><span class="ln">  domain: <span class="c-str">"sports-tech · tournament management · OTT"</span>,</span><span class="ln">  focus: [<span class="c-str">"API integration"</span>, <span class="c-str">"performance"</span>,</span><span class="ln">          <span class="c-str">"reusable component libraries"</span>, <span class="c-str">"responsive UI"</span>],</span><span class="ln">  alsoDoes: [<span class="c-str">"code reviews"</span>, <span class="c-str">"mentoring"</span>],</span><span class="ln">  sideQuest: <span class="c-str">"state-level table tennis athlete since 2019"</span>,</span><span class="ln">} <span class="c-key">as const</span>;</span></pre></div>
+        <div class="code"><pre><span class="ln"><span class="c-com">// Frontend Developer · 2 years in production</span></span><span class="ln"><span class="c-key">export const</span> developer = {</span><span class="ln">  name: <span class="c-str">"Divyanshu Lingwal"</span>,</span><span class="ln">  location: <span class="c-str">"Delhi, India"</span>,</span><span class="ln">  role: <span class="c-str">"Frontend Developer"</span>,</span><span class="ln">  company: <span class="c-str">"Stupa Sports Analytics"</span>,</span><span class="ln">  experienceYears: <span class="c-num">2</span>,</span><span class="ln">  domain: <span class="c-str">"sports-tech · tournament management · OTT"</span>,</span><span class="ln">  focus: [<span class="c-str">"API integration"</span>, <span class="c-str">"performance"</span>,</span><span class="ln">          <span class="c-str">"reusable component libraries"</span>, <span class="c-str">"responsive UI"</span>],</span><span class="ln">  alsoDoes: [<span class="c-str">"code reviews"</span>, <span class="c-str">"mentoring"</span>],</span><span class="ln">  background: <span class="c-str">"former state-level table tennis player"</span>,</span><span class="ln">} <span class="c-key">as const</span>;</span></pre></div>
         <div class="facts">
           <div class="fact"><span class="label">Experience</span><span class="v">2 yrs</span></div>
           <div class="fact"><span class="label">Federations served</span><span class="v">4</span></div>
           <div class="fact"><span class="label">Main stack</span><span class="v">Angular · TS</span></div>
-          <div class="fact"><span class="label">Playing TT since</span><span class="v">2019</span></div>
-          <div class="fact"><span class="label">State</span><span class="v">Haryana</span></div>
+          <div class="fact"><span class="label">Domain</span><span class="v">Sports tech</span></div>
+          <div class="fact"><span class="label">Background</span><span class="v">Ex TT player</span></div>
         </div>
       </div>
     </div>
@@ -714,6 +740,8 @@ document.documentElement.setAttribute('data-mode',m);})();
       </div>
       <ul class="log">
         <li class="head"><span class="hash">c52e7d4</span> <span class="msg">feat(pvl): match center with stats, standings and results</span></li>
+        <li><span class="hash">e4b07a3</span> <span class="msg">feat(ems): match scheduling module for tournament events</span></li>
+        <li><span class="hash">9f21c6e</span> <span class="msg">feat(ems): fixture creation engine for multiple fixture types</span></li>
         <li><span class="hash">a1f9e02</span> <span class="msg">feat: ship OTT platform for the Event Management System</span></li>
         <li><span class="hash">7c3d5b1</span> <span class="msg">feat(api): integrate data APIs for tournament and event workflows</span></li>
         <li><span class="hash">4e8a0c7</span> <span class="msg">perf: optimize frontend performance of production apps</span></li>
@@ -726,13 +754,14 @@ document.documentElement.setAttribute('data-mode',m);})();
 
   <section id="projects">
     <div class="wrap">
-      <div class="sec-head"><span class="file">projects/ems-ott/README.md</span><h2>Event Management System · OTT</h2></div>
+      <div class="sec-head"><span class="file">projects/stupa-events-ems/README.md</span><h2>Stupa Events EMS · SaaS</h2></div>
       <div class="proj">
         <div>
-          <p style="margin:0;max-width:60ch">I built the OTT platform for Stupa's Event Management System from the ground up: application structure, UI design and business workflows. National and international table tennis federations use it to run and stream their events.</p>
+          <p style="margin:0;max-width:60ch"><strong>Stupa Events' Event Management System (EMS)</strong> is a multi-tenant SaaS product that national and international table tennis federations use to run and stream their events. I built two of its core modules, <strong>fixture creation</strong> and <strong>match scheduling</strong>, and its OTT platform from the ground up: application structure, UI design and business workflows.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><span class="pill">SaaS · multi-tenant</span><span class="pill">4 federations live</span></div>
           <ul class="feat">
-            <li><code>draw.gen()</code><span>Draw-generation logic supporting multiple fixture types</span></li>
-            <li><code>scheduler</code><span>Match scheduler module to plan and manage tournament schedules</span></li>
+            <li><code>fixtures.create()</code><span><b>Core module.</b> Fixture creation: draw-generation logic supporting multiple fixture types</span></li>
+            <li><code>scheduler.plan()</code><span><b>Core module.</b> Match scheduling: plan and manage tournament match schedules across tables and time slots</span></li>
             <li><code>print()</code><span>Scoresheet printing for matches inside the EMS</span></li>
           </ul>
         </div>
@@ -748,7 +777,7 @@ document.documentElement.setAttribute('data-mode',m);})();
       </div>
       <div class="mods">
         <figure class="mod">
-          <figcaption class="label">draw.gen({ type: "knockout", size: 8 })</figcaption>
+          <figcaption class="label">fixtures.create({ type: "knockout", size: 8 })</figcaption>
           <svg class="viz" data-viz="draw" data-flavor="dev" viewBox="0 0 420 300" role="img" aria-label="Sample 8-player knockout draw with the winner's path highlighted"></svg>
           <p class="mod-cap">Seeds placed, rounds linked, winner path resolved through to the final.</p>
         </figure>
@@ -795,57 +824,32 @@ document.documentElement.setAttribute('data-mode',m);})();
     </div>
   </section>
 
-  <section id="athlete" class="athlete">
+  <section id="athlete">
     <div class="wrap">
-      <div class="sec-head"><span class="file">athlete.mode = true</span><h2>Table Tennis</h2></div>
+      <div class="sec-head"><span class="file">src/domain.ts</span><h2>Player → Developer</h2></div>
       <div class="ath-intro">
         <div>
-          <p>I have played competitive table tennis since 2019. I represent <strong>Haryana</strong> in national tournaments and play out of <strong>Fatehabad</strong> district on the Haryana Table Tennis Association circuit.</p>
-          <p>Every season I play the state ranking championships and the Haryana State &amp; Inter-District Championships, and I have been ranked inside the state's top 12 men every year since 2023. At nationals I've played against some of the country's top-ranked players.</p>
-          <p class="c-com mono" style="font-size:13px">// The same sport I build software for.</p>
+          <p>Before writing tournament software, I competed in table tennis tournaments for Haryana at state and national level. That gave me domain knowledge you can't get from a spec: how draws feel to players, why schedules slip, and what officials need at the table.</p>
+          <p class="c-com mono" style="font-size:13px">// domain knowledge in, better product decisions out</p>
         </div>
-        <div class="stats">
-          <div class="stat"><div class="n">#6</div><div class="t">Best HTTA men's rank (2024)</div></div>
-          <div class="stat"><div class="n">#6</div><div class="t">HTTA junior boys U-19 (2023)</div></div>
-          <div class="stat"><div class="n">150</div><div class="t">Ranking points, 2024 season</div></div>
-          <div class="stat"><div class="n">2019</div><div class="t">Playing competitively since</div></div>
-        </div>
+        <div class="code nw"><pre><span class="ln"><span class="c-key">const</span> features = playerExperience</span><span class="ln">  .map(lesson =&gt; lesson.toFeature());</span><span class="ln"></span><span class="ln"><span class="c-com">// =&gt; fixtures.create(), scheduler.plan(),</span></span><span class="ln"><span class="c-com">//    scoresheet.print(), codeReview()</span></span></pre></div>
       </div>
-
-      <div class="ath-grid">
-        <div class="panel">
-          <h3>State ranking by season</h3>
-          <p class="sub">HTTA Men's Singles final position · lower is better</p>
-          <svg id="rankChart" viewBox="0 0 520 260" role="img" aria-label="Line chart of Haryana men's singles ranking: 11th in 2023, 6th in 2024, 12th in 2025, 10th in 2026 after first ranking event"></svg>
-        </div>
-        <div class="panel">
-          <h3>2024 season · points log</h3>
-          <p class="sub">Men's Singles · finished #6 with 150 pts</p>
-          <div class="tbl-wrap">
-            <table>
-              <thead><tr><th>Event</th><th class="r">Pts</th></tr></thead>
-              <tbody id="pts24"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel" style="margin-top:24px">
-        <h3>Ranking history</h3>
-        <p class="sub">Haryana Table Tennis Association official rankings</p>
+      <div class="panel">
+        <h3>lessons.map()</h3>
+        <p class="sub">what playing taught me → where it shows up in the work</p>
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Season</th><th>Category</th><th class="r">Points</th><th class="r">Position</th></tr></thead>
+            <thead><tr><th>Lesson from the table</th><th>Applied in</th></tr></thead>
             <tbody>
-              <tr><td>2026*</td><td>Men's Singles</td><td class="r">30</td><td class="r">10</td></tr>
-              <tr><td>2025</td><td>Men's Singles</td><td class="r">100</td><td class="r">12</td></tr>
-              <tr><td>2024</td><td>Men's Singles</td><td class="r">150</td><td class="r"><span class="best">6</span></td></tr>
-              <tr><td>2023</td><td>Men's Singles</td><td class="r">45</td><td class="r">11</td></tr>
-              <tr><td>2023</td><td>Junior Boys U-19</td><td class="r">75</td><td class="r"><span class="best">6</span></td></tr>
+              <tr><td>Draws must be fair and follow the format rules</td><td><span class="c-fn">fixtures.create()</span>: fixture creation, multiple fixture types</td></tr>
+              <tr><td>Long, unpredictable waits hurt players and events</td><td><span class="c-fn">scheduler.plan()</span>: matches across tables and time slots</td></tr>
+              <tr><td>Results are only as good as the scoresheet</td><td><span class="c-fn">scoresheet.print()</span>: prefilled, print-ready sheets</td></tr>
+              <tr><td>Review every match, improve a little each time</td><td>code reviews, mentoring, steady iteration</td></tr>
+              <tr><td>Stay calm under pressure</td><td>shipping and supporting live events</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="src">*2026 standing after the 1st ranking event. Source: HTTA ranking lists <a href="https://htta.in/assets/pdf/ranking2024/MS_5.pdf" target="_blank" rel="noopener">2024</a> · <a href="https://htta.in/assets/pdf/ranking2025/MSRanking2025-5.pdf" target="_blank" rel="noopener">2025</a> · <a href="https://htta.in/assets/pdf/ranking2023/MS.pdf" target="_blank" rel="noopener">2023</a> · <a href="https://htta.in/assets/pdf/ranking2023/JBS_U19.pdf" target="_blank" rel="noopener">2023 U-19</a> · <a href="https://htta.in/assets/pdf/ranking2026/RANKINGMS2026.pdf" target="_blank" rel="noopener">2026</a></p>
+        <p class="src">// record: competed for Haryana (state and national level); best state rank #6 men's singles, 2024 · source: <a href="https://htta.in/assets/pdf/ranking2024/MS_5.pdf" target="_blank" rel="noopener">HTTA</a></p>
       </div>
     </div>
   </section>
@@ -927,7 +931,7 @@ modeBtns.forEach(b=>b.addEventListener('click',()=>{
 }));
 
 /* typed roles */
-const roles=["Frontend Developer","Angular · TypeScript engineer","Sports-tech builder","State-level TT athlete"];
+const roles=["Frontend Developer","Angular · TypeScript engineer","Sports-tech builder","Ex-player turned sports-tech dev"];
 const typed=document.getElementById('typed');
 if(!reduce){
   let r=0,i=roles[0].length,del=true,wait=40;
@@ -1077,37 +1081,6 @@ document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
   }
   document.querySelectorAll('svg.viz').forEach(render);
 })();
-/* points table 2024 */
-(function(){
-  const rows=[["1st State Ranking · Gurugram",30],["2nd State Ranking · Karnal",15],["3rd State Ranking · Sonepat",30],["4th State Ranking",15],["58th State & Inter-District Ch.",60]];
-  const max=60,tb=document.getElementById('pts24');
-  rows.forEach(([n,p])=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${n}</td><td class="r"><span class="bar-cell"><span class="b" style="width:${Math.round(p/max*70)}px"></span>${p}</span></td>`;tb.appendChild(tr);});
-  const tr=document.createElement('tr');tr.innerHTML='<td style="color:var(--fg);font-weight:700">Total</td><td class="r"><span class="best">150</span></td>';tb.appendChild(tr);
-})();
-
-/* ranking chart */
-(function(){
-  const svg=document.getElementById('rankChart'),NS='http://www.w3.org/2000/svg';
-  const data=[["2023",11],["2024",6],["2025",12],["2026*",10]];
-  const W=520,H=260,L=48,R=24,T=20,B=40,ymin=1,ymax=14;
-  const x=i=>L+i*(W-L-R)/(data.length-1);
-  const y=v=>T+(v-ymin)/(ymax-ymin)*(H-T-B);
-  const mk=(t,a,txt)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;};
-  const line=tok('--line'),mut=tok('--muted'),acc=tok('--accent'),ball=tok('--ball'),fg=tok('--fg'),bg=tok('--panel');
-  [1,4,8,12].forEach(v=>{mk('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:line});mk('text',{x:L-10,y:y(v)+4,'text-anchor':'end',fill:mut,'font-size':11,'font-family':'JetBrains Mono, monospace'},'#'+v);});
-  mk('rect',{x:L,y:y(1),width:W-L-R,height:y(10.5)-y(1),fill:acc,'fill-opacity':.06});
-  mk('text',{x:W-R-6,y:y(1)+14,'text-anchor':'end',fill:mut,'font-size':10,'font-family':'JetBrains Mono, monospace'},'top 10');
-  const d=data.map((p,i)=>(i?'L':'M')+x(i)+' '+y(p[1])).join('');
-  mk('path',{d:d+`L${x(data.length-1)} ${H-B}L${x(0)} ${H-B}Z`,fill:acc,'fill-opacity':.08});
-  mk('path',{d,fill:'none',stroke:acc,'stroke-width':2.5,'stroke-linejoin':'round'});
-  data.forEach((p,i)=>{
-    const best=p[1]===6;
-    mk('circle',{cx:x(i),cy:y(p[1]),r:best?7:5,fill:best?ball:bg,stroke:best?ball:acc,'stroke-width':2});
-    mk('text',{x:x(i),y:y(p[1])-13,'text-anchor':'middle',fill:best?ball:fg,'font-size':12,'font-weight':700,'font-family':'JetBrains Mono, monospace'},'#'+p[1]);
-    mk('text',{x:x(i),y:H-B+22,'text-anchor':'middle',fill:mut,'font-size':11,'font-family':'JetBrains Mono, monospace'},p[0]);
-  });
-})();
-
 /* three.js rally */
 (function(){
   const canvas=document.getElementById('rally');
@@ -1242,7 +1215,7 @@ document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
     });
   }
   // demo typing
-  const phrases=['Divyanshu Lingwal','Frontend Developer','I build websites people enjoy','Table tennis, Team Haryana'];
+  const phrases=['Divyanshu Lingwal','Frontend Developer','I build websites people enjoy','From player to sports tech'];
   let pi=0,idx=phrases[0].length,text=phrases[0],state='hold',nextAt=performance.now()+2600,userUntil=0;
   function step(now){
     if(now<userUntil||now<nextAt)return;
